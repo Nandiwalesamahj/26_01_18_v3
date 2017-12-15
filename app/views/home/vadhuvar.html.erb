@@ -1,0 +1,63 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+
+	<div class="col-xs-8 col-xs-offset-1">
+		<h2 align="center">वधू वर सूचक मंडळ</h2>
+		<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+			<div class="row">
+				<% if @summary_exist != nil %>
+					<%= simple_form_for @summary_exist do |f| %>
+					<%= f.input :Vadhuvar_summary, label: "वधू वर सूचक मंडळ सारांश" %>
+					<%= f.submit "Update" %>
+					<% end %>
+				<% else %>
+					<%= simple_form_for @summary do |f| %>
+					<%= f.input :Vadhuvar_summary, label: "वधू वर सूचक मंडळ सारांश" %>
+					<%= f.submit "Save" %>
+					<% end %>
+				<% end %>
+			</div>
+		<% else %>
+			<% if @summary_exist != nil %>
+				<h4 align="center" class="margin-bottom2"><%= simple_form(@summary_exist.Vadhuvar_summary) %></h4>
+			<% end %>
+		<% end %>
+		<hr>
+		<div class="col-xs-9 col-xs-offset-1">
+			<% if user_signed_in? && current_user.vadhuvar_created != "Yes" %>
+				<p><%= link_to "सगळे वधुवर", vadhuvars_path, class: "btn btn-info btn-md btn-responsive" %></p>
+				<%=  render 'vadhuvars/form' %>
+			<% elsif user_signed_in? && current_user.vadhuvar_created == "Yes" %>
+				<p><%= link_to "सगळे वधुवर", vadhuvars_path, class: "btn btn-info btn-md btn-responsive" %></p>
+				<% if @vadhuvar_pass != nil %>
+					<%= simple_form_for @vadhuvar_pass do |f| %>
+					<p> फोटो </p>
+					<%= f.file_field :photo %>
+					<%= f.input :vadhuvar_name,label: "नाव" %>
+					<%= f.input :birth_date,label: "जन्म तारीख"  %>
+					<%= f.input :gender, collection: [:स्त्री,:पुरूष],label: "लिंग" %>
+					<%= f.input :height, label: "उंची" %>
+					<%= f.input :weight, label: "वजन" %>
+					<%= f.input :education, label: "शिक्षण" %>
+					<%= f.input :blood_group, label: "रक्त गट" %>
+					<%= f.input :phone_number, label: "मोबाइल नंबर" %>
+					<%= f.input :expecations, label: "अपेक्षा" %>
+					<%= f.input :salary, label: "पगार" %>
+					<%= f.input :occupation, label: "व्यवसाय" %>
+					<%= f.input :father_name, label: "वडिलांचे नाव" %>
+					<%= f.input :mother_name, label: "आईचे नाव" %>
+					<%= f.input :uncle_name, label: "मामाचे नाव " %>
+					<%= f.input :address, label: "पत्ता " %>
+					<%= f.input :sub_caste, label: "कूळ" %>
+					<%= f.input :bio, label: "स्वतः विषयी " %>
+					<%= f.submit "सबमिट करा" %>
+					<% end %>
+				<% end %>
+			<% else %>
+				<% unless user_signed_in? %>
+					<h3 align="center">लॉगिन करा</h3>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

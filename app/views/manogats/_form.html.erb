@@ -1,0 +1,9 @@
+<%= simple_form_for @manogat do |f| %>
+	<%= f.input :user_name,label: "नाव" %>
+	<%= f.input :description,label: "वर्णन"  %>
+	<p>फोटो</p>
+	<%= f.file_field :photo,label: "फोटो" %>
+	<p>Attachment</p>
+	<%= f.file_field :attachment,label: "attachment" %>
+	<%= f.submit "जतन करा" %>
+<% end %>

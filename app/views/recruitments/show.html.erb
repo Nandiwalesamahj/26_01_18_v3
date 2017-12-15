@@ -1,0 +1,25 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+<div class="col-xs-8 col-xs-offset-1">
+<h1 align="center" class="margin-bottom2">कर्मचारी भरती(माहिती) </h1>
+
+ <% count = 1 %>
+ <% if @recruitment != nil %>
+	<div class="col-xs-3">
+		<p><%= image_tag((@recruitment.photo.url), class: "karmchari-img image-responsive") %></p>
+	</div>
+	<div class="col-xs-8 col-xs-offset-1">
+		<p><b>नाव: </b> <%= @recruitment.user_name %></p>
+		<p><b>शिक्षण: </b> <%= @recruitment.education %></p>
+		<p><b>तांत्रिक शिक्षण: </b> <%= @recruitment.technical_education %></p>
+		<p><b>पदनाम: </b> <%= @recruitment.work %></p>
+		<p><b>संस्थेचे नाव: </b> <%= @recruitment.organisation %></p>
+		<p><b>कालावधी: </b> <%= @recruitment.tenure %></p>
+		<p><% if @recruitment.resume? %>
+				<%= link_to "#{truncate(File.basename(@recruitment.resume.path),length: 25)}",:action => 'download_file_recruitment', :controller=>"recruitments", :id => @recruitment.id,target: :_blank %>
+				<% end %></p>
+<% else %>
+<h3 align="center">कर्मचारी भरती उपलब्ध नाहीत </h3>
+<% end %>
+</div>	
+</div>

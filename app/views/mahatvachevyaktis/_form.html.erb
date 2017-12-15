@@ -1,0 +1,15 @@
+<%= simple_form_for @person do |f| %>
+	
+	<%= f.input :user_name,label: "नाव" %>
+	<%= f.input :post,label: "पदनाम" %>
+	<%= f.input :importance_type, collection: [:प्रतिष्ठीत_मंडळाचे_सदस्य,:पुरस्कार_प्राप्त_व्यक्ती,:समाजातील_पंच,:उद्योजक,:व्यापारी,:सेवादाते,:समाज_बांधव,:शासकीय_कर्मचारी] %>
+	<%= f.input :work_field, label: "कार्यक्षेञ	" %>
+	<%= f.input :phone_number, label: "मोबाइल नंबर" %>
+	<%= f.input :address, label: "पत्ता " %>
+	<%= f.input :info, label: "व्यक्ती विषयी" %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>
+
+
+	
+

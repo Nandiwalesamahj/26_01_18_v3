@@ -1,0 +1,2 @@
+module ShaskiyayojanasHelper
+end

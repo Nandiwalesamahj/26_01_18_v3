@@ -1,0 +1,97 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+
+	<div class="col-xs-10">	
+	<h2 align="center"><strong>भविष्‍यातील ध्‍येय धोरणे</strong></h2>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+	<div class="row">
+		<% if @summary_exist != nil %>
+	<%= simple_form_for @summary_exist do |f| %>
+		<%= f.input :future_vision_summary, label: "भविष्‍यातील ध्‍येय धोरणे सारांश" %>
+		<%= f.submit "Update" %>
+	<% end %>
+<% else %>
+	<%= simple_form_for @summary do |f| %>
+			<%= f.input :future_vision_summary, label: "भविष्‍यातील ध्‍येय धोरणे सारांश" %>
+			<%= f.submit "Save" %>
+	<% end %>
+<% end %>
+	</div>
+	<% else %>
+	<% if @summary_exist != nil %>
+	<h4 align="center" class="margin-bottom2"><%= simple_format(@summary_exist.future_vision_summary) %></h4>
+	<% end %>
+	<% end %>
+		<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+			<%= link_to "नवीन ध्येय",new_vision_path,class: "btn btn-info btn-sm btn-responsive" %>
+		<% end %>
+		<hr>
+		<div class="row">
+<% count = 1 %>
+            <div class="col-xs-8">
+			<% if  @visions!= nil &&  @visions.size > 0 %>
+				<div class="table-responsive">
+	     		<table class="table2">
+	     			<col width="50">
+					<col width="700">
+					<thead>
+                        <tr>
+                            <th>नंबर</th>
+                            <th> ध्‍येय</th>
+                        </tr>
+                    </thead>
+					
+					<% for member in @visions %>
+					<tbody>
+						<tr>
+						<td>
+							<p><b><%= count %></b></p>
+						</td>
+						<td>
+							<p align="left" class="margin-left"><% if member.description? %>
+								<%= simple_format(member.description) %>
+								<% end %>
+							</p>
+							<p align="left" class="margin-left"><% if user_signed_in? && current_user.user_type == "Super_admin" %>
+									<%= link_to "एडिट ध्येय",edit_vision_path(member),class: "btn btn-warning btn-xs btn-responsive" %>
+									<%= link_to "Delete ध्येय",vision_path(member), method: :delete,class: "btn btn-danger btn-xs btn-responsive" %>
+								<% end %>
+							</p>
+						</td>
+						</tr>
+					</tbody>
+					<% count = count + 1 %>
+					<% end %>
+				</table>
+
+				</div>
+			<% else %>
+				<h3 align="center"> डेटा जोडण्यासाठी प्रशासकाशी संपर्क साधा </h3>
+			<% end %>
+			</div>
+			<div class="col-xs-4">
+              <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3>जाहिरात</h3>
+              </div>
+             	<div class="panel-body scrollable">
+			<div class="advertisement-box">
+			 
+			</div>
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+              </div>  
+          </div>
+		</div>
+	</div>
+</div>

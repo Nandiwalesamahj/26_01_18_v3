@@ -1,0 +1,232 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+		
+		<div class="col-xs-10">
+<h2 align="center"><strong>जिल्हा संघटना पदाधिकारी</strong></h2>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+		<div class="row">
+			<% if @summary_exist != nil %>
+				<%= simple_form_for @summary_exist do |f| %>
+					<%= f.input :Zilla_sanghatna_summary, label: "जिल्हा संघटना पदाधिकारी सारांश" %>
+					<%= f.submit "Update" %>
+				<% end %>
+			<% else %>
+				<%= simple_form_for @summary do |f| %>
+					<%= f.input :Zilla_sanghatna_summary, label: "जिल्हा संघटना पदाधिकारी सारांश" %>
+					<%= f.submit "Save" %>
+				<% end %>
+			<% end %>
+		</div>
+	<% else %>
+	<% if @summary_exist != nil %>
+		<h4 align="center" class="margin-bottom2"><%= simple_format(@summary_exist.Zilla_sanghatna_summary) %></h4>
+	<% end %>
+	<% end %> 
+	<hr>
+	
+		<div class="col-xs-9">
+		<div class="row margin-page-data">
+			<%= image_tag(("map.jpg") , class: "image-responsive") %>
+		</div>
+		<hr>
+
+		<div class="row margin-page-data">
+		<div class="panel panel-default post-options">
+			<div class="panel-heading">
+				<h4 align="left"><b>कोकण विभाग</b></h4>	
+			</div>
+
+			<div class="row panel-body">
+				<div class="col-xs-3">
+					<%= link_to "मुंबई शहर",view_zilla_adhikari_path(:passed_params => "मुंबई_शहर") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "मुंबई उपनगर",view_zilla_adhikari_path(:passed_params => "मुंबई_उपनगर") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "ठाणे",view_zilla_adhikari_path(:passed_params => "ठाणे") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "पालचर",view_zilla_adhikari_path(:passed_params => "पालचर") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "राजगड",view_zilla_adhikari_path(:passed_params => "राजगड") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "रत्नागिरी",view_zilla_adhikari_path(:passed_params => "रत्नागिरी") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "सिंधुदुर्ग",view_zilla_adhikari_path(:passed_params => "सिंधुदुर्ग") %>
+				</div>
+			</div>	
+		</div>
+		</div>
+
+		<div class="row margin-page-data">
+		<div class="panel panel-default post-options">
+			<div class="panel-heading">
+				<h4 align="left"><b>नाशिक विभाग</b></h4>
+			</div>	
+			<div class="row panel-body">
+				<div class="col-xs-3">
+				<%= link_to "नाशिक",view_zilla_adhikari_path(:passed_params => "नाशिक") %>			
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "धुळे",view_zilla_adhikari_path(:passed_params => "धुळे") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "नंदुरबार",view_zilla_adhikari_path(:passed_params => "नंदुरबार") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "जळगाव",view_zilla_adhikari_path(:passed_params => "जळगाव") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "अहमदनगर",view_zilla_adhikari_path(:passed_params => "अहमदनगर") %>
+				</div>
+			</div>	
+		</div>
+		</div>
+
+		<div class="row margin-page-data">
+			<div class="panel panel-default post-options">
+			<div class="panel-heading">
+				<h4 align="left"><b>पुणे विभाग</b></h4>
+			</div>	
+			
+			<div class="row panel-body">
+				<div class="col-xs-3">			
+					<%= link_to "पुणे",view_zilla_adhikari_path(:passed_params => "पुणे") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "सातारा",view_zilla_adhikari_path(:passed_params => "सातारा") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "सांगली",view_zilla_adhikari_path(:passed_params => "सांगली") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "सोलापूर",view_zilla_adhikari_path(:passed_params => "सोलापूर") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "कोल्हापूर",view_zilla_adhikari_path(:passed_params => "कोल्हापूर") %>
+				</div>
+			</div>	
+		</div>
+		</div>
+
+		<div class="row margin-page-data">
+		<div class="panel panel-default post-options">
+			<div class="panel-heading">
+				<h4 align="left"><b>औरंगाबाद विभाग</b></h4>	
+			</div>
+			<div class="row panel-body">
+				<div class="col-xs-3">
+					<%= link_to "औरंगाबाद",view_zilla_adhikari_path(:passed_params => "औरंगाबाद") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "जालना",view_zilla_adhikari_path(:passed_params => "जालना") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "परभणी",view_zilla_adhikari_path(:passed_params => "परभणी") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "हिंगोली",view_zilla_adhikari_path(:passed_params => "हिंगोली") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "बीड",view_zilla_adhikari_path(:passed_params => "बीड") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "नांदेड",view_zilla_adhikari_path(:passed_params => "नांदेड") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "उस्मानाबाद",view_zilla_adhikari_path(:passed_params => "उस्मानाबाद") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "लातूर",view_zilla_adhikari_path(:passed_params => "लातूर") %>
+				</div>
+			</div>	
+		</div>
+		</div>
+
+		<div class="row margin-page-data">
+		<div class="panel panel-default post-options">
+			<div class="panel-heading">
+				<h4 align="left"><b>अमरावती विभाग</b></h4>	
+			</div>
+			<div class="row panel-body">
+				<div class="col-xs-3">
+					<%= link_to "अमरावती",view_zilla_adhikari_path(:passed_params => "अमरावती") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "बुलढाणा",view_zilla_adhikari_path(:passed_params => "बुलढाणा") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "अकोला",view_zilla_adhikari_path(:passed_params => "अकोला") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "वाशिम",view_zilla_adhikari_path(:passed_params => "वाशिम") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "यवतमाळ",view_zilla_adhikari_path(:passed_params => "यवतमाळ") %>
+				</div>
+			</div>	
+		</div>
+		</div>
+
+		<div class="row margin-page-data">
+		<div class="panel panel-default post-options">
+			<div class="panel-heading">
+				<h4 align="left"><b>नागपूर विभाग</b></h4>	
+			</div>
+			<div class="row panel-body">
+				<div class="col-xs-3">
+					<%= link_to "नागपूर",view_zilla_adhikari_path(:passed_params => "नागपूर") %>
+				</div>
+				<div class="col-xs-3">
+					
+					<%= link_to "वर्धा",view_zilla_adhikari_path(:passed_params => "वर्धा") %>
+				</div>
+				<div class="col-xs-3">
+					
+					<%= link_to "भंडारा",view_zilla_adhikari_path(:passed_params => "भंडारा") %>
+				</div>
+				<div class="col-xs-3">
+					
+					<%= link_to "गोंदिया",view_zilla_adhikari_path(:passed_params => "गोंदिया") %>
+				</div>
+				<div class="col-xs-3">
+					
+					<%= link_to "चंद्रपूर",view_zilla_adhikari_path(:passed_params => "चंद्रपूर") %>
+				</div>
+				<div class="col-xs-3">
+					<%= link_to "गडचिरोली",view_zilla_adhikari_path(:passed_params => "गडचिरोली") %>
+				</div>
+			</div>	
+		</div>
+		</div>
+
+	</div>
+	<div class="col-xs-3">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>जाहिरात</h3>
+		</div>
+			<div class="panel-body scrollable">
+			<div class="advertisement-box">
+			  
+			</div>
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+	</div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,10 @@
+<%= simple_form_for @tantamukti do |f| %>
+	<p><b>फोटो</b></p>
+	<%= f.file_field :photo %>
+	<%= f.input :user_name,label: "नाव" %>
+	<%= f.input :post,label: "पदनाम" %>
+	<%= f.input :work_field, label: "कार्यक्षेञ	" %>
+	<%= f.input :phone_number, label: "मोबाइल नंबर" %>
+	<%= f.input :address, label: "पत्ता " %>	
+	<%= f.submit "सबमिट करा" %>
+<% end %>

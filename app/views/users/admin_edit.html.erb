@@ -1,0 +1,12 @@
+<div class="col-xs-8 col-xs-offset-3">
+<% if @user != nil %>
+<%= simple_form_for(@user) do |f| %>
+	<%= f.input :user_type, collection: [:Super_admin,:Sub_admin,:normal] %>
+	<%= f.input :adhikari_type, collection: [:राज्य_संघटना_पदाधिकारी,:युवा_संघटना],label: "अधिकारी प्रकार" %>
+	<%= f.button :submit, "सबमिट करा" %>
+<% end %>
+<% else %>
+Access Denied
+<% end %>
+</div>
+

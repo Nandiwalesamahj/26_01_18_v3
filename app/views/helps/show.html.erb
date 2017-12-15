@@ -1,0 +1,16 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+	<div class="col-xs-8 col-xs-offset-1">
+<% for a_helper in @helpers %>
+	<div>
+	<<%= link_to "edit मदतकरता ", edit_help_path(a_helper) %>
+		<%= a_helper.helper_name %>
+		<%= a_helper.helper_post %>
+		<%= a_helper.helper_phone %>
+		<%= a_helper.helper_address %>
+		<%= a_helper.helper_email %>
+	</div>
+	<hr>
+<% end %>
+</div>
+</div>

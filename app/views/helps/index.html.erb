@@ -1,0 +1,80 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+		
+	<div class="col-xs-10">
+	<h2 align="center"><strong>मदत कार्य</strong></h2>	
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+	<div class="row">
+		<% if @summary_exist != nil %>
+	<%= simple_form_for @summary_exist do |f| %>
+		<%= f.input :help_summary, label: "मदत कार्य सारांश" %>
+		<%= f.submit "Update" %>
+	<% end %>
+<% else %>
+	<%= simple_form_for @summary do |f| %>
+			<%= f.input :help_summary, label: "मदत कार्य सारांश" %>
+			<%= f.submit "Save" %>
+	<% end %>
+<% end %>
+	</div>
+	<% else %>
+	<% if @summary_exist != nil %>
+	<h4 align="center" class="margin-bottom2">(<%= simple_format(@summary_exist.help_summary) %>)</h4>
+	<% end %>
+	<% end %>
+
+	<hr>
+	<div class="col-xs-7">
+		<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h2>मदत विनंत्या</h2>
+			<% if user_signed_in? %>
+				<%= link_to "विनंती मदत", new_help_path , class: "btn btn-info btn-xs btn-responsive" %>
+			<% end %>
+		</div>
+		<div class="panel-body scrollable">
+			<% if @helpies.size > 0 %>
+				<% count = 1%>
+				<% for helpie in @helpies %>
+					<p><b><%= count %>.नाव :</b><%= helpie.helpie_name %></p>
+					<p><b>मोबाइल नंबर :</b><%= helpie.helpie_phone %></p>
+					<p><b>पत्ता :</b><%= helpie.helpie_address %></p>
+					<p><b>समस्या विषय :</b><%= helpie.help_title %></p>
+					<p><b>समस्या बाबत सविस्तर माहिती :</b><%= helpie.help_description %></p>
+					<p><b>अपेक्षा</b><<%= helpie.help_expecation %></p>
+					<hr>
+					<% count = count + 1 %>
+				<% end %>
+			<% end %>
+		</div>
+		</div>
+	</div>
+
+	<div class="col-xs-4 col-xs-offset-1">
+		<div class="panel panel-primary">
+		<div class="panel-heading">
+			<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+				<%= link_to " मदतकरता ऍड करा ", new_helper_path , class: "btn btn-info btn-xs btn-responsive" %>
+			<% end %>
+			<h2> मदतीकरता संपर्क</h2>
+		</div>
+		<div class="panel-body scrollable">
+			<% if @helpers.size > 0 %>
+				<% count = 1%>
+				<% for a_helper in @helpers %>
+					<p><b><%= count %>.नाव :</b><%= a_helper.helper_name %></p>
+					<p><b>पदनाम :</b><%= a_helper.helper_post %></p>
+					<p><b>मोबाइल नंबर :</b><%= a_helper.helper_phone %></p>
+					<p><b>ईमेल: </b><%= a_helper.helper_email %></p>
+					<p><b>पत्ता :</b><%= a_helper.helper_address %></p>
+					<p><b><%= link_to "Delete", help_path(a_helper),method: :delete,class: "btn btn-warning btn-xs btn-responsive" %></b></p>
+
+					<hr>
+					<% count = count + 1 %>
+				<% end %>
+			<% end %>
+		</div>
+		</div>
+	</div>
+	</div>
+</div>

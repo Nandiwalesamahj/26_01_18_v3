@@ -1,0 +1,7 @@
+<%= simple_form_for @shaskiyayojana do |f| %>
+	<%= f.input :title,label: "शीर्षक" %>
+	<%= f.input :description,label: "वर्णन"  %>
+	<p>Attachment</p>
+	<%= f.file_field :attachment %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>

@@ -1,0 +1,25 @@
+
+<div class="row">
+<%= render 'home/sidebar' %>
+	<div class="col-xs-6 col-xs-offset-1">
+	<div class="panel panel-info">
+     <div class="panel-heading">
+		<h2 align="left">@shaskiyayojana.title</h2>
+	</div>
+	
+	<div class="panel-body">
+		<h4 align="left"><%= @shaskiyayojana.description %></h4>
+	<% if user_signed_in? && (@shaskiyayojana.user_id = current_user.id) %>
+	<% if @shaskiyayojana.attachment? %>
+				<p>Attachments-</p>
+				<p><%= link_to "#{truncate(File.basename(@shaskiyayojana.attachment.path),length: 25)}", :action => 'download_file_shaskiyayojana', :controller=>"shaskiyayojanas", :id => @shaskiyayojana.id,:target => "_blank" %></p>
+	<% end %>
+	</div>
+	<div class="panel-footer">
+		<%= link_to "Delete", shaskiyayojana_path(@shaskiyayojana),method: :delete,data: {confirm: "Confirm Delete"} %>
+	</div>
+	<% end %>
+	</div>
+	</div>
+	</div>
+</div>

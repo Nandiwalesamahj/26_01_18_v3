@@ -1,0 +1,777 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+    <div class="col-xs-8 col-xs-offset-1">
+    <% if @district %>
+		<h2 align="center"><strong><%= @district %></strong></h2>
+      <% if @district =="मुंबई_शहर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+                    <% if @summary_exist != nil %>
+                      <%= simple_form_for @summary_exist do |f| %>
+                        <%= f.input :मुंबई_शहर, label: "#{@district} सारांश" %>
+                        <%= f.submit "Update" %>
+                      <% end %>
+                    <% else %>
+                      <%= simple_form_for @summary do |f| %>
+                        <%= f.input :मुंबई_शहर, label: "#{@district} सारांश" %>
+                        <%= f.submit "Save" %>
+                      <% end %>
+                    <% end %>
+              </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+              <h4 align="center" class="margin-bottom2">(<%= @summary_exist.मुंबई_शहर %>)</h4>
+          <% end %>
+      <% end %>
+      <% elsif @district =="मुंबई_उपनगर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :मुंबई_उपनगर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :मुंबई_उपनगर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.मुंबई_उपनगर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="ठाणे" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :ठाणे, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :ठाणे, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.ठाणे %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="पालचर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :पालचर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :पालचर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.पालचर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="राजगड" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :राजगड, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :राजगड, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.राजगड %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="रत्नागिरी" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :रत्नागिरी, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :रत्नागिरी, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.रत्नागिरी %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="सिंधुदुर्ग" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :सिंधुदुर्ग, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :सिंधुदुर्ग, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.सिंधुदुर्ग %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="नाशिक" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :नाशिक, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :नाशिक, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.नाशिक %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="धुळे" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :धुळे, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :धुळे, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.धुळे %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="नंदुरबार" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :नंदुरबार, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :नंदुरबार, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.नंदुरबार %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="जळगाव" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :जळगाव, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :जळगाव, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.जळगाव %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="अहमदनगर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :अहमदनगर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :अहमदनगर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.अहमदनगर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="पुणे" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :पुणे, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :पुणे, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.पुणे %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="सातारा" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :सातारा, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :सातारा, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.सातारा %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="सांगली" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :सांगली, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :सांगली, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.सांगली %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="सोलापूर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :सोलापूर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :सोलापूर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.सोलापूर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="कोल्हापूर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :कोल्हापूर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :कोल्हापूर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.कोल्हापूर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="औरंगाबाद" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :औरंगाबाद, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :औरंगाबाद, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.औरंगाबाद %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="जालना" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :जालना, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :जालना, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.जालना %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="परभणी" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :परभणी, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :परभणी, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.परभणी %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="हिंगोली" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :हिंगोली, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :हिंगोली, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.हिंगोली %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="बीड" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :बीड, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :बीड, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.बीड %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="नांदेड" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :नांदेड, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :नांदेड, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.नांदेड %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="उस्मानाबाद" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :उस्मानाबाद, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :उस्मानाबाद, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.उस्मानाबाद %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="लातूर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :लातूर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :लातूर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.लातूर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="अमरावती" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :अमरावती, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :अमरावती, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.अमरावती %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="बुलढाणा" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :बुलढाणा, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :बुलढाणा, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.बुलढाणा %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="अकोला" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :अकोला, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :अकोला, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.अकोला %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="वाशिम" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :वाशिम, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :वाशिम, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.वाशिम %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="यवतमाळ" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :यवतमाळ, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :यवतमाळ, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.यवतमाळ %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="नागपूर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :नागपूर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :नागपूर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.नागपूर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="वर्धा" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :वर्धा, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :वर्धा, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.वर्धा %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="भंडारा" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :भंडारा, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :भंडारा, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.भंडारा %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="गोंदिया" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :गोंदिया, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :गोंदिया, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.गोंदिया %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="चंद्रपूर" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :चंद्रपूर, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :चंद्रपूर, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.चंद्रपूर %>)</h4>
+            <% end %>
+            <% end %>
+      <% elsif @district =="गडचिरोली" %>
+          <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+            <div class="row">
+              <% if @summary_exist != nil %>
+              <%= simple_form_for @summary_exist do |f| %>
+              <%= f.input :गडचिरोली, label: "#{@district} सारांश" %>
+              <%= f.submit "Update" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for @summary do |f| %>
+                <%= f.input :गडचिरोली, label: "#{@district} सारांश" %>
+                <%= f.submit "Save" %>
+            <% end %>
+          <% end %>
+            </div>
+            <% else %>
+            <% if @summary_exist != nil %>
+            <h4 align="center" class="margin-bottom2">(<%= @summary_exist.गडचिरोली %>)</h4>
+            <% end %>
+            <% end %>
+      <% end %>
+    <hr>
+    <div class="row">
+    <% if @users != nil && @users.size > 0 %>
+      <div class="table-responsive">
+      <table class="table2">
+          <col width="200">
+          <col width="500">
+          <thead>
+              <tr>
+                  <th>फोटो</th>
+                  <th> माहिती</th>
+              </tr>
+          </thead>
+        	<% for user in @users %>
+              <% if user.zilla_approval == "Yes" %>
+                  <tbody>
+                      <tr>
+                          <td>
+                              <% if user.avatar? %>
+                                 <%= image_tag((user.avatar.url), class: "manogat-img image-responsive") %>
+                              <% else %>
+                                  <% if user.gender == "Male" %>
+                                      <%= image_tag('male-no-avatar.png') %>
+                                  <% elsif user.gender == "Female" %>
+                                      <%= image_tag('female-no-avatar.png') %>
+                                  <% end %>
+                              <% end %>
+                          </td>
+                          <td>
+                              <% if user.first_name != nil && user.last_name != nil && user.middle_name != nil %>
+                                  <p align="left" class="margin-left"><b>नाव :</b><%= user.full_name %></p>
+                              <% end %>
+                              <p align="left" class="margin-left"><b>पदनाम :</b><%= user.post %></p>
+                              <p align="left" class="margin-left"><b>कालावधी :</b><%= user.tenure %></p>
+                              <p align="left" class="margin-left"><b>फोन नंबर :</b><%= user.phone %></p>
+                              <p align="left" class="margin-left"><b>पत्ता :</b><%= user.address %></p>
+                              <p align="left" class="margin-left"><b>स्वतः विषयी :</b><%= user.bio %></p>
+                          </td>
+                      </tr>
+                  </tbody>
+              <% end %>
+          <% end %>
+      </table>
+      </div>
+    <% else %>
+		  <h3 align="center"> <%= @district %> जिल्हा कार्यकर्ते डेटाबेसमध्ये उपलब्ध नाहीत </h3>
+    <% end %>
+    </div>
+    <% end %>
+    </div>
+</div>

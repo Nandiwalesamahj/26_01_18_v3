@@ -1,0 +1,92 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+
+<div class="col-xs-10">
+<h2 align="center"><strong>समाजाविषयी</strong></h2>	
+<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+	<div class="row">
+		<% if @summary_exist != nil %>
+	<%= simple_form_for @summary_exist do |f| %>
+		<%= f.input :aboutsamaj_summary, label: "समाजाविषयी सारांश" %>
+		<%= f.submit "Update" %>
+	<% end %>
+<% else %>
+	<%= simple_form_for @summary do |f| %>
+			<%= f.input :aboutsamaj_summary, label: "समाजाविषयी सारांश" %>
+			<%= f.submit "Save" %>
+	<% end %>
+<% end %>
+	</div>
+	<% else %>
+	<% if @summary_exist != nil %>
+	<h4 class="margin-bottom2"><%= simple_format(@summary_exist.aboutsamaj_summary) %></h4>
+	<% end %>
+	<% end %>
+	<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
+		<%= link_to "नवीन समाजजातीविषयी माहिती",new_aboutsamaj_path, class: "btn btn-info btn-sm" %>
+	<% end %>
+	<hr>
+	<div class="row">
+		<div class="col-xs-8">
+		<% if @about_samajs != nil && @about_samajs.size > 0 %>
+			<div class="table-responsive">
+			<table class="table2">
+				<col width="50">
+				<col width="700">
+					<thead>
+					<tr>
+						<th>नंबर</th>
+						<th> माहिती</th>
+					</tr>
+					</thead>
+					<% count = 1 %>
+					<% for about_samaj in @about_samajs %>
+						<tbody>
+							<tr>
+							<td align="center"><%= count %></td>
+							<td>
+								<p align="left" class="margin-left"><b><%= about_samaj.title %></b></p>
+							 	<p align="left" class="margin-left"><%= simple_format(about_samaj.description) %></p>
+							<p align="left" class="margin-left">
+									<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
+										<%= link_to "Edit", edit_aboutsamaj_path(about_samaj) , class: "btn btn-warning btn-sm btn-responsive" %> 
+										<%= link_to "Delete", aboutsamaj_path(about_samaj),method: :delete ,class: "btn btn-danger btn-sm btn-responsive"%>
+									<% end %>
+								</p>
+							</td>
+							</tr>
+						</tbody>
+						<% count = count + 1 %>
+					<% end %>
+			</table>
+			</div>
+		<% else %>
+			<h3>माहिती उपलब्ध नाही </h3>
+		<% end %>
+		</div>
+		<div class="col-xs-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>जाहिरात</h3>
+				</div>
+					<div class="panel-body scrollable">
+					<div class="advertisement-box">
+					
+					</div>
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+			</div>	
+		</div>
+	</div>
+	</div>
+</div>

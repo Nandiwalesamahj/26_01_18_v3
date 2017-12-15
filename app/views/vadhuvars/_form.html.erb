@@ -1,0 +1,24 @@
+<%= simple_form_for @vadhuvar do |f| %>
+	<p> फोटो </p>
+	<%= f.file_field :photo %>
+	<%= f.input :vadhuvar_name,label: "नाव" %>
+	<%= f.input :birth_date,label: "जन्म तारीख"  %>
+	<%= f.input :gender, collection: [:स्त्री,:पुरूष],label: "लिंग" %>
+	<%= f.input :height, label: "उंची" %>
+	<%= f.input :weight, label: "वजन" %>
+	<%= f.input :education, label: "शिक्षण" %>
+	<%= f.input :blood_group, label: "रक्त गट" %>
+	<%= f.input :phone_number, label: "मोबाइल नंबर" %>
+	<%= f.input :expecations, label: "अपेक्षा" %>
+	<%= f.input :salary, label: "पगार" %>
+	<%= f.input :occupation, label: "व्यवसाय" %>
+	<%= f.input :father_name, label: "वडिलांचे नाव" %>
+	<%= f.input :mother_name, label: "आईचे नाव" %>
+	<%= f.input :uncle_name, label: "मामाचे नाव " %>
+	<%= f.input :address, label: "पत्ता " %>
+	<%= f.input :sub_caste, label: "कूळ" %>
+	<%= f.input :bio, label: "स्वतः विषयी " %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>
+
+	

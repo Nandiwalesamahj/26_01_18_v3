@@ -1,0 +1,101 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+
+	<div class="col-xs-10">
+<h2 align="center"><strong>कर्मचारी भरती</strong></h2>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+	<div class="row">
+		<% if @summary_exist != nil %>
+	<%= simple_form_for @summary_exist do |f| %>
+		<%= f.input :recruitment_summary, label: "कर्मचारी भरती सारांश" %>
+		<%= f.submit "Update" %>
+	<% end %>
+<% else %>
+	<%= simple_form_for @summary do |f| %>
+			<%= f.input :recruitment_summary, label: "कर्मचारी भरती सारांश" %>
+			<%= f.submit "Save" %>
+	<% end %>
+<% end %>
+	</div>
+	<% else %>
+	<% if @summary_exist != nil %>
+	<h4 align="center" class="margin-bottom2"><%= simple_format(@summary_exist.recruitment_summary) %></h4>
+	<% end %>
+	<% end %>
+		<% if user_signed_in? %>
+			<%= link_to "कर्मचारी भरती बददल महिती जोडा",new_recruitment_path, class: "btn btn-md btn-info btn-responive" %>
+		<% end %>
+		<hr>
+		<div class="row">
+		<div class="col-xs-8">
+		<% if @recruitments.size > 0 %>
+			<% count = 1 %>
+		<div class="table-responsive">
+   <table class="table2">
+    <col width="50">
+			<col width="700">
+			<thead>
+				<tr>
+					<th>नंबर</th>
+					<th> माहिती</th>
+				</tr>
+			</thead>
+			<% for recruitment in @recruitments %>
+				<tbody>
+					<tr>
+						<td>
+							<b><%= count %></b>
+						</td>
+						<td>
+							<p align="left" class="margin-left"><b><%= recruitment.title %></b></p>
+							<p align="left" class="margin-left"><%= simple_format(recruitment.description) %></p>
+							<p align="left" class="margin-left">
+								<% if recruitment.attachment? %>
+									<%= link_to "#{truncate(File.basename(recruitment.attachment.path),length: 25)}",:action => 'download_file_recruitment', :controller=>"recruitments", :id => recruitment.id,target: :_blank %>
+								<% end %>
+							</p>
+							<p align="left" class="margin-left">
+								<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+									<%= link_to "Edit", edit_recruitment_path(recruitment) , class: "btn btn-warning btn-xs btn-responsive" %>
+									<%= link_to "Delete",recruitment_path(recruitment),method: :delete , class: "btn btn-danger btn-xs btn-responsive"  %>
+								<% end %>
+							</p>
+						</td>
+					</tr>
+				</tbody>
+				<% count = count + 1 %>
+			<% end %>
+			</table>
+<%= will_paginate @posts, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>
+			</div>
+		<% else %>
+			<h3 align="center">कोणतेही कर्मचारी भरती बददल महिती आले नाहीत </h3>
+		<% end %>
+		</div>
+		
+		<div class="col-xs-4">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>जाहिरात</h3>
+			</div>
+				<div class="panel-body scrollable">
+				<div class="advertisement-box">
+				  
+				</div>
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+			</div>	
+		</div>
+		</div>
+	</div>
+</div>

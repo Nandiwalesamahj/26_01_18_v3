@@ -1,0 +1,16 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+	<div class="col-xs-10">
+	<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+		<h2 align="center" class="margin-bottom2">Edit Advertise</h2>
+		<hr>
+		<div class="col-xs-8 col-xs-offset-2">
+			<div class="row">
+			<%= render 'form' %>
+		</div>
+		</div>
+		<% else %>
+		Access Denied
+		<% end %>		
+	</div>
+</div>

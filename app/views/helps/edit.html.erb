@@ -1,0 +1,12 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+	<div class="col-xs-6 col-xs-offset-2">
+<%= simple_form_for @helper do |f| %>
+	<%= f.input :helper_name, label: "नाव"  %>
+	<%= f.input :helper_post, label: "पदनाम" %>
+	<%= f.input :helper_address, label: "पत्ता" %>
+	<%= f.input :helper_phone, label: "मोबाइल नंबर" %>
+	<%= f.input :helper_email,label: "ईमेल" %>
+<% end %>
+</div>
+</div>

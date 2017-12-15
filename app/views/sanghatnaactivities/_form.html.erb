@@ -1,0 +1,10 @@
+<%= simple_form_for @sanghatnaactivity do |f| %>
+	<%= f.input :title,label: "शीर्षक" %>
+	<%= f.input :description,label: "वर्णन"  %>
+	<%= f.input :event_date, label: "तारीख" %>
+	<p>Photo</p>
+	<%= f.file_field :photo,label: "add file" %>
+	<p>Attachment</p>
+	<%= f.file_field :attachment,label: "add file" %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>

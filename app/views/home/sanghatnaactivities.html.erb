@@ -1,0 +1,108 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+
+	<div class="col-xs-10">
+	<h2 align="center"><strong>संघटनेची कार्ये</strong></h2>		
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+			<div class="row">
+				<% if @summary_exist != nil %>
+			<%= simple_form_for @summary_exist do |f| %>
+				<%= f.input :Sanghatna_activity_summary, label: "संघटनेची कार्ये सारांश" %>
+				<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= simple_form_for @summary do |f| %>
+					<%= f.input :Sanghatna_activity_summary, label: "संघटनेची कार्ये सारांश" %>
+					<%= f.submit "Save" %>
+			<% end %>
+		<% end %>
+			</div>
+			<% else %>
+			<% if @summary_exist != nil %>
+			<h4 class="margin-bottom2"><%= simple_format(@summary_exist.Sanghatna_activity_summary) %></h4>
+			<% end %>
+			<% end %>
+		<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+			<%= link_to "नवीन कार्य", new_sanghatnaactivity_path , class: "btn btn-info btn-sm btn-responsive"  %>
+		<% end %>
+	<hr>	
+	<div class="row">
+		<div class="col-xs-8">
+		<% if @sanghatnaactivities != nil && @sanghatnaactivities.size > 0 %>
+			<div class="table-responsive">
+	    	<table class="table2">
+	    		<col width="200">
+				<col width="500">
+				<thead>
+					<tr>
+					<th>फोटो</th>
+					<th> माहिती</th>
+					</tr>
+				</thead>
+				<% for sanghatnaactivity in @sanghatnaactivities %>
+				<tbody>
+					<tr>
+					<td>
+						<% if sanghatnaactivity.photo? %>
+							<%= image_tag((sanghatnaactivity.photo.url),class: "manogat-img image-responsive") %>
+						<% else %>
+									<p align="left" class="margin-left"><b>फोटो उपलब्ध नाही</b></p>
+						<% end %>
+					</td>
+					<td>
+						<p align="left" class="margin-left"><% if sanghatnaactivity.title? %>
+							<b>शीर्षक: </b> <%= sanghatnaactivity.title %>
+						<% end %></p>
+						<p align="left" class="margin-left"><b>तारीख: </b> <% if sanghatnaactivity.event_date? %>
+							<%= sanghatnaactivity.event_date %>
+						<% end %></p>
+						<p align="left" class="margin-left"><b>वर्णन :</b> <% if sanghatnaactivity.description? %>
+						<%= simple_format(sanghatnaactivity.description) %>
+						<% end %></p>
+						<p align="left" class="margin-left">
+						<% if sanghatnaactivity.attachment? %>
+						<%= link_to "#{truncate(File.basename(sanghatnaactivity.attachment.path),length: 25)}","#",target: :_blank %>
+						<% end %>
+						</p>
+						<p align="left" class="margin-left">
+							<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+							<%= link_to "Edit", edit_sanghatnaactivity_path(sanghatnaactivity) , class: "btn btn-warning btn-xs btn-responsive" %>
+							<%= link_to "Delete", sanghatnaactivity_path(sanghatnaactivity),method: :Delete , class: "btn btn-danger btn-xs btn-responsive" %>
+							<% end %>
+						</p>
+					</td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+			</div>
+		<% else %>
+			<h3 align="center">संघटनेची क्रिया अद्याप जोडलेली नाही, प्रशासकाशी संपर्क साधा!</h3>
+		<% end %>
+		</div>
+		<div class="col-xs-4">
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>जाहिरात</h3>
+		</div>
+			<div class="panel-body scrollable">
+			<div class="advertisement-box">
+			  
+			</div>
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+		</div>	
+		</div>
+	</div>
+	</div>
+</div>

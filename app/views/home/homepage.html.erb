@@ -1,0 +1,167 @@
+<div class="row">
+	<%= render 'home/sidebar' %>
+	<div class="col-xs-6 col-xs-offset-1" id="manogat">
+	<div class="col-xs-6 col-xs-offset-1" id="display-button">	
+	</div>
+		<% if @manogat != nil  %>
+			<div>
+			<p align="center">
+			<% if @manogat.photo? %>
+			<%= image_tag(@manogat.photo.url,class: "manogat-img image-responsive")%>
+			<% end %>
+			</p>
+			<h2 align="center">
+			<%= @manogat.user_name %>
+			</h2>
+			<p>
+			<b><%= simple_format(@manogat.description) %></b>
+			</p>
+			<p>
+			<% if @manogat.attachment? %>
+			<%= link_to "#{truncate(File.basename(@manogat.attachment.path),length: 25)}","#",target: :_blank %>
+			<% end %>
+			</p>
+			<p>
+			<%if user_signed_in? %>
+				<% if current_user.user_type == "Super_admin" %>
+					<%= link_to "एडिट मनोगत" , edit_manogat_path(@manogat), class: "btn btn-info btn-sm btn-responsive" %>
+					<%= link_to "Delete मनोगत" , manogat_path(@manogat),method: :delete,data: {confirm: "तुम्हाला खात्री आहे की तुम्ही मनोगत हटवू इच्छिता?"}, class: "btn btn-danger btn-sm btn-responsive" %>
+				<% end %>
+			<% end %>
+			</p>
+			</div>
+		<% else %>
+			<% if user_signed_in? %>
+				<% if current_user.user_type == "Super_admin" %>
+					<%= link_to "नवीन मनोगत " , new_manogat_path,class: "btn btn-default btn-sm btn-responsive" %>
+				<% end %>
+			<% else %>
+			<h3 align="center">मनोगत डेटाबेसमध्ये आढळला नाही, प्रशासनाशी संपर्क साधा.</h3>
+			<% end %>
+		<% end %>
+
+	</div>
+	<div class="col-xs-3">
+		<div class="panel panel-default post-options">
+
+			<div class="panel-heading">
+			<p><h4><b>संदेश </b><% if user_signed_in? && (current_user.user_type == "Super_admin" || current_user.user_type == "Sub_admin") %>
+			 |
+			<%= link_to "नवीन संदेश",new_message_path, class: "btn btn-warning btn-responsive" %>
+			<% end %>
+			</h4>
+			</p>	
+			</div>
+			<div class="panel-body scrollable">
+				<% if @messages != nil && @messages.size > 0 %>
+					<% for message in @messages %>
+					<p><strong>=>  </strong><b><%= link_to "#{message.title}" ,message_path(message)%></b></p>
+					<% end %>
+				<% else %>
+				<h5><b>कोणतेही संदेश नाहीत</b></h5>
+				<% end %>
+
+			</div>
+		</div>
+
+
+		
+	</div>
+</div>
+
+<div class="col-xs-12">
+	 <footer class="row footer-nandi">
+	 		<div class="row">
+	 		<div class="col-xs-1">
+	 		<a href = "https://www.maharashtra.gov.in/1125/Home">
+	 		<%= image_tag("govmh.png" ,class: "duve-img image-responsive")%>
+              महाराष्ट्र शासन
+            </a>
+            </div>
+
+            <div class="col-xs-1 col-xs-offset-1">
+            <a href = "https://www.mahaonline.gov.in">
+              <%= image_tag("e-seva.png" ,class: "duve-img image-responsive")%>
+              ई-सेवा
+            </a>
+            </div>
+
+            <div class="col-xs-1 col-xs-offset-1">
+            <a href = "https://aadhaar.maharashtra.gov.in">
+              <%= image_tag("adhar.png" ,class: "duve-img image-responsive")%>
+              आधार
+            </a>
+            </div>
+
+            <div class="col-xs-1  col-xs-offset-1">
+            <a href = "https://www.maharashtra.gov.in/1147/Citizen-Charter">
+           		<%= image_tag("govmh.png" ,class: "duve-img image-responsive")%>
+               नागरिकांची सनद
+            </a>
+            </div>
+            
+            <div class="col-xs-1  col-xs-offset-1">
+            <a href = "http://www.nvsp.in">
+              <%= image_tag("voters.jpg" ,class: "duve-img image-responsive")%>
+             राष्ट्रीय मतदार-सेवा
+            </a>
+            </div>
+
+            <div class="col-xs-1  col-xs-offset-1">
+            <a href = "https://www.mahanews.gov.in">
+              <%= image_tag("news.png" ,class: "duve-img image-responsive")%>
+            	महाराष्ट्राबाबतच्या बातम्या
+            </a>
+            </div>
+            </div>
+
+
+
+           	<div class="row margin-footer">
+           	<div class="col-xs-1">
+            <a href ="http://www.mahapolice.gov.in">
+              <%= image_tag("police.gif" ,class: "duve-img image-responsive")%>
+             महाराष्ट्र-राज्य पोलीस
+            </a>
+            </div>
+
+             <div class="col-xs-1  col-xs-offset-1"> 
+            <a href = "https://www.maharashtra.gov.in/1144/Cabinet-Decisions">
+              <%= image_tag("govmh.png" ,class: "duve-img image-responsive")%>
+              मंत्रिमंडळ निर्णय
+            </a>
+            </div>
+
+	 		<div class="col-xs-1 col-xs-offset-1">
+	 		<a href = "https://india.gov.in">
+           		<%= image_tag("indian-national.jpg" ,class: "duve-img image-responsive")%>
+              भारताचे राष्ट्रीय संकेतस्थळ
+            </a>
+            </div>
+
+            <div class="col-xs-1 col-xs-offset-1">
+            <a href = "https://www.utiitsl.com/UTIITSL_SITE/pan/">
+              <%= image_tag("pan.jpg" ,class: "duve-img image-responsive")%>
+              ऑनलाइन पॅन कार्ड अर्ज
+            </a>
+            </div>
+
+            <div class="col-xs-1  col-xs-offset-1">
+            <a href = "https://mahaeschol.maharashtra.gov.in/">
+              <%= image_tag("e-schol.jpg" ,class: "duve-img image-responsive")%>
+              ई-शिष्यवृत्ती
+            </a>
+            </div>
+
+            <div class="col-xs-1  col-xs-offset-1">
+            <a href = "https://www.maharashtra.gov.in/1148/RTI-Act-2005">
+           	<%= image_tag("govmh.png" ,class: "duve-img image-responsive")%>
+              माहितीचा अधिकार
+            </a></div>
+
+            </div>
+	<br>
+	<p style="color:white" >&copy;  nandiwalesamaj.com 2017-2018</p>
+        <p style="color:white" > Developed and Maintained by: "Shawn P. Gajlekar" and "Tejas S. Pawar" </p>
+    </footer>
+</div>

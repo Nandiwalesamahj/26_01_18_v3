@@ -1,0 +1,41 @@
+<div class="col-xs-8 col-xs-offset-3">
+<%= simple_form_for([@user]) do |f| %>
+<% if @user.id == current_user.id %>
+	<% if @user.avatar? %>
+		<p><%= image_tag((@user.avatar.url),class: "manogat-img image-responsive") %></p>
+	<label><%= f.check_box :remove_avatar %>
+	<%= f.submit :Remove %>
+	</label>
+	<% else %>
+		<% if @user.gender == "Male" %>
+		<%= image_tag('male-no-avatar.png') %>
+		<% elsif @user.gender == "Female" %>
+		<%= image_tag('female-no-avatar.png') %>
+		<% end %>
+		<p><b>फोटो निवडा</b></p>
+	<%= f.file_field :avatar, label: "Avatar", title: "फोटो निवडा" , class: "file-picker" %>
+	<%= f.button :submit, "सबमिट करा" %>
+
+	<% end %>
+<% end %>
+<% end %>
+
+<%= simple_form_for(@user) do |f| %>
+	<% if @user.id == current_user.id %>
+		<%= f.input :first_name, label: "पहिले नाव" %>
+		<%= f.input :middle_name, label: "मधले नाव" %>
+		<%= f.input :last_name, label: "आडनाव" %>
+		<%= f.input :gender, collection: [:स्त्री, :पुरूष],label: "लिंग ( पुरूष / स्त्री )"%>
+		<%= f.input :birthdate, label: "जन्म तारीख" , :start_year => Date.current.year, :end_year => 1940 %>
+		<%= f.input :post, label: "पदनाम" %>
+		<%= f.input :tenure, label: "कालावधी" %>
+		<%= f.input :phone, label: "फोन नंबर" %>
+		<%= f.input :address, label: "पत्ता" %>
+	<%= f.input :bio, label: "स्वतः विषयी" %>
+	<%= f.input :work_at_district, label: "कार्य जिल्हा" , as: :select,collection: [:मुंबई_शहर,:मुंबई_उपनगर,:ठाणे,:पालचर,:राजगड,:रत्नागिरी,:सिंधुदुर्ग,:नाशिक,:धुळे,:नंदुरबार,:जळगाव,:अहमदनगर,:पुणे,:सातारा,:सांगली,:सोलापूर,:कोल्हापूर,:औरंगाबाद,:जालना,:परभणी,:हिंगोली,:बीड,:नांदेड,:उस्मानाबाद,:लातूर,:अमरावती,:बुलढाणा,:अकोला,:वाशिम,:यवतमाळ,:नागपूर,:वर्धा,:भंडारा,:गोंदिया,:चंद्रपूर,:गडचिरोली], input_html: { class: "chosen-select" }  %>
+	
+
+	<%= f.button :submit, "सबमिट करा" %>
+	<% end %>
+<% end %>
+</div>

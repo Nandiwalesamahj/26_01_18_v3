@@ -1,0 +1,59 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+<h2 align="center"><strong>प्रतिष्ठीत मंडळाचे सदस्य</strong></h2>
+<hr>
+	<div class="col-xs-10">
+	<% if  @importantpeople!= nil &&  @importantpeople.size > 0 %>
+			<div class="table-responsive">
+	    	<table class="table2">
+
+	    		<col width="200">
+	    		<col width="100">
+	    		<col width="200">
+	    		<col width="150">
+	    		<col width="150">
+	    		<col width="250">
+				<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+	    		<col width="150">
+	    		<% end %>
+				<thead>
+					<tr>
+						<th>नाव</th>
+						<th>पदनाम</th>
+						<th>माहिती</th>
+						<th>कार्यक्षेञ</th>
+						<th>मोबाइल नंबर</th>
+						<th>पत्ता</th>
+						<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+							<th>पर्याय</th>
+						<% end %>
+					</tr>
+				</thead>
+				<% count = 1 %>
+				<% for member in @importantpeople %>
+				<tbody>
+					<tr>
+						<td><% if member.user_name? %>
+								<%= member.user_name %>
+						<% end %>
+						</td>
+						<td><%= member.post %></td>
+						<td><%= member.importance_type %></td>
+						<td><%= member.work_field %></td>
+						<td><%= member.phone_number %></td>
+						<td><%= member.address %></td>
+						<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+							<td><%= link_to "edit", edit_mahatvachevyakti_path(member) , class: "btn btn-warning btn-xs btn-responsive" %>
+							<%= link_to "delete ", mahatvachevyakti_path(member),method: :delete,data: {confirm: "confirm-delete?"} , class: "btn btn-danger btn-xs btn-responsive"%>
+							</td>
+						<% end %>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+			</div>
+		<% else %>
+			<h3 align="center">समाजातील महत्‍वाच्‍या व्‍यक्‍ती डेटाबेसमध्ये आढळला नाही, त्यांना जोडण्यासाठी प्रशासनाशी संपर्क साधा.</h3>
+		<% end %>
+	</div>
+</div>

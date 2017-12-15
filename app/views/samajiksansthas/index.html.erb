@@ -1,0 +1,100 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+
+	<div class="col-xs-10">
+<h2 align="center"><strong>सामाजिक संस्‍था</strong></h2>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+	<div class="row">
+		<% if @summary_exist != nil %>
+	<%= simple_form_for @summary_exist do |f| %>
+		<%= f.input :samajiksanstha_summary, label: "सामाजिक संस्‍था सारांश" %>
+		<%= f.submit "Update" %>
+	<% end %>
+<% else %>
+	<%= simple_form_for @summary do |f| %>
+			<%= f.input :samajiksanstha_summary, label: "सामाजिक संस्‍था सारांश" %>
+			<%= f.submit "Save" %>
+	<% end %>
+<% end %>
+	</div>
+	<% else %>
+	<% if @summary_exist != nil %>
+	<h4 class="margin-bottom2">(<%= simple_format(summary_exist.samajiksanstha_summary) %>)</h4>
+	<% end %>
+	<% end %>
+	<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
+		<%= link_to "समाजिक संस्था जोडा",new_samajiksanstha_path, class: "btn btn-info btn-sm" %>
+	<% end %>
+	<hr>
+		<div class="row">
+			<div class="col-xs-8">
+				<% if @samajiksansthas != nil && @samajiksansthas.size > 0 %>
+				<div class="table-responsive">
+				<table class="table2">
+					<col width="50">
+					<col width="700">
+					<thead>
+					<tr>
+						<th>नंबर</th>
+						<th> माहिती</th>
+					</tr>
+					</thead>
+					<% count = 1 %>
+					<% for samajiksanstha in @samajiksansthas %>
+						<tbody>
+						<tr>
+							<% if samajiksanstha != nil %>
+							<td align="center"><%= count %></td>
+							
+							<td>
+								<p align="left" class="margin-left"><% if samajiksanstha.title %><b> <%= samajiksanstha.title %></b><% end %>
+								<% if samajiksanstha.description %><%= simple_format(samajiksanstha.description) %><% end %> </p>
+								<p align="left" class="margin-left">
+									<% if samajiksanstha.attachment? %>
+										<%= link_to "#{truncate(File.basename(samajiksanstha.attachment.path),length: 25)}", :action => 'download_file_samajiksanstha', :controller=>"samajiksansthas", :id => samajiksanstha.id %>
+									<% end %>
+								</p>
+								<p align="left" class="margin-left">
+									<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
+									<%= link_to "Edit",edit_samajiksanstha_path(samajiksanstha), class: "btn btn-warning btn-xs btn-responsive" %>
+									<%= link_to "Delete",samajiksanstha_path(samajiksanstha),method: :delete, class: "btn btn-danger btn-xs btn-responsive" %>
+									<% end %>
+								</p>
+							</td>
+						</tr>
+					<% end %>
+						</tbody>
+						<% count = count + 1 %>				
+					<% end %>
+				</table>
+				</div>
+				<% else %>
+					<p><h3> माहिती उपलब्ध नाही </h3></p>
+				<% end %>
+			</div>
+			<div class="col-xs-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>जाहिरात</h3>
+				</div>
+				<div class="panel-body scrollable">
+				 <div class="advertisement-box">
+				  
+				</div>
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+			</div>	
+		</div>
+		</div>
+	</div>
+</div>

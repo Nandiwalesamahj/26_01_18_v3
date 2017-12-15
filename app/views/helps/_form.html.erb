@@ -1,0 +1,9 @@
+<%= simple_form_for @help do |f| %>
+	<%= f.input :helpie_name, label: "नाव"  %>
+	<%= f.input :helpie_address, label: "पत्ता" %>
+	<%= f.input :helpie_phone, label: "मोबाइल नंबर" %>
+	<%= f.input :help_title, label: "समस्या" %>
+	<%= f.input :help_description,label: "समस्या बाबत सविस्तर माहिती" %>
+	<%= f.input :help_expecation, label: "अपेक्षा" %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>

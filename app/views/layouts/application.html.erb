@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mr" xml:lang="mr">
+	
+  <head>
+  <title >नंदीवाले समाज</title>
+  <%= favicon_link_tag 'icon.jpg' %>
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+   	<meta name="keywords" content="nandiwale,Nandiwale,Nandiwalesamaj,nandiwalesamaj,nadniwalesamaj,Nadniwalesamaj, nandi samaj,Nandi Samaj,nandi Samaj,Nandi Samaj,Nandiwalesamaj.com,nandiwalesamaj.com"> 
+	<%= csrf_meta_tags %>
+	<meta name="google-site-verification" content="5bbU71DduLyR0WN36NHaHn32GDxX_tle2ZHGR5Q1GbQ" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  
+   <div class="margin-main-div">
+  
+  <body class="bg">
+   <div class="col-xs-12">
+  <div class="row">
+    <div class="col-xs-2">
+    <div align="left">
+      <%= image_tag(('logo.jpg'),class: "image-responsive-logo img2 margin-logo") %>
+    </div>
+    </div>
+    <div class="col-xs-10">
+      <h1 align="center" class="box-title"> अखिल महाराष्ट्र राज्य नंदीवाले समाज संघटना </h1>
+        <%= render 'layouts/navbar' %>
+  </div>
+  <hr>
+  </div>
+  
+    <%= yield %>
+   </div>  
+  </body>
+ 
+  </div>
+  
+</html>

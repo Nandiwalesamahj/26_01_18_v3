@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <%= link_to "मुखपृष्‍ठ",homepage_path,class: "navbar-brand" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "समाजाविषयी", aboutsamajs_path %></li>
+        <li><%= link_to "शासकिय योजना", shaskiyayojanas_path %></li>
+        <li><%= link_to "शासन निर्णय", shasandecisions_path %></li>
+        <li><%= link_to "सामाजिक संस्‍था", samajiksansthas_path %></li>
+        <li><%= link_to "मदत कार्य", helps_path %></li>
+        <li><%= link_to "प्रतिक्रिया", feedbacks_path %></li>
+        <li><%= link_to "संपर्क", contact_us_path %></li>
+        
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+    <% unless user_signed_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">पर्याय<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           <li><%= link_to "लॉग इन",new_user_session_path %></li>
+           
+            <li><%= link_to "साइन अप करा", new_registration_path(resource_name) %></li>
+           
+          </ul>
+        </li>
+        <%else %>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">पर्याय<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li><%= link_to "लॉग आऊट",destroy_user_session_path ,method: :delete %></li>
+          <li><%= link_to "पासवर्ड बदला ",edit_user_registration_path(current_user) %>
+	    <% if current_user.user_type == "Super_admin" %>
+           <li><%= link_to "All Users", users_path %></li> 
+           <li><%= link_to "Edit Approvals", approval_index_path %></li>
+           <li><%= link_to "Edit Disapprovals", disapproval_index_path %></li>
+           <li><%= link_to "Advertises", advertises_path %></li>
+           <% end %>
+          <li><%= link_to "एडिट प्रोफाईल",edit_user_path(current_user) %></li>
+          </ul>
+          </li> 
+        <% end %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

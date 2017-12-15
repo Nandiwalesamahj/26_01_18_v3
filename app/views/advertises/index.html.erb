@@ -1,0 +1,57 @@
+<div class="row">
+<%= render 'home/sidebar' %>
+<h2 align="center" class="margin-bottom"><strong>Advertises</strong></h2>
+    <div class="col-xs-10">
+    <% if user_signed_in? && current_user.user_type == "Super_admin" %>
+    <%= link_to 'New Advertise', new_advertise_path , class: "btn btn-info btn-sm btn-responsive" %>
+    <hr>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+        <% if @advertises.size > 0 %>
+            <div class="table-responsive">
+            <table class="table2">
+                <col width="100">
+                <col width="200">
+                <col width="300">
+                <col width="300">
+                <col width="50">
+                <col width="75">
+
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Photo</th>
+                        <th>On page</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <% @advertises.each do |advertise| %>
+                    <tbody>
+                        <tr>
+                          <td><p align="left" class="margin-left"><%= advertise.title %></p></td>
+                          <td><p align="left" class="margin-left"><%= advertise.description %></p></td>
+                          <td><p align="left" class="margin-left">
+                            <% if advertise.photo? %>
+                              <%= image_tag((advertise.photo.url),class: "karmchari-img image-responsive" ) %>
+                            <% end %>
+                          </p></td>
+                          <td><p align="left" class="margin-left"><%= advertise.on_page %></p></td>
+                          <td><p align="left" class="margin-left"><%= link_to 'Edit', edit_advertise_path(advertise) , class: "btn btn-warning btn-xs btn-responsive" %></p></td>
+                          <td><p align="left" class="margin-left"><%= link_to 'Destroy', advertise, method: :delete, data: { confirm: 'Are you sure?'} , class: "btn btn-danger btn-xs btn-responsive"%></p></td>
+                        </tr>
+                    </tbody>
+                <% end %>
+            </table>
+            </div>
+        <% else %>
+            <h3><strong>Advertisements not available..!</strong></h3>
+        <% end %>
+        </div>
+    </div>
+    <% else %>
+    <h1 align="center">Access Denied</h1>
+    <% end %>
+    </div>
+</div>

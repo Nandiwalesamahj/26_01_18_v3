@@ -1,0 +1,3 @@
+class Mahatvachevyakti < ApplicationRecord
+
+end

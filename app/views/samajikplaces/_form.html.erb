@@ -1,0 +1,9 @@
+<%= simple_form_for @samajikplace do |f| %>
+	<%= f.input :title,label: "शीर्षक" %>
+	<%= f.input :description,label: "वर्णन"  %>
+	<%= f.input :place,label: "जागा" %>
+	<%= f.input :address,label: "पत्ता"  %>
+	<p>Photo</p>
+	<%= f.file_field :photo,label: "add file" %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>

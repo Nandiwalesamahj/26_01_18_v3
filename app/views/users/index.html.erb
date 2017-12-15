@@ -1,0 +1,104 @@
+ <div class="row">
+<%= render 'home/sidebar' %>
+<h2 align="center" class="margin-bottom2">All Registered Users</h2>
+	<% if user_signed_in? && current_user.user_type == "Super_admin" %>	
+		<div class="col-xs-8 col-xs-offset-1">
+		<div class="row">
+			<% if @users.size > 0 %>
+				<div class="table-responsive">
+				<table class="table2">
+				<col width="200">
+				<col width="100">
+				<col width="200">
+				<col width="100">
+				<col width="50">
+					<thead>
+					<tr>
+						<th>नाव</th>
+						<th>फोन नंबर</th>
+						<th>पदनाम</th>
+						<th>अधिकारी प्रकार</th>
+						<th>गाव</th>
+						<th>E-Mail</th>
+						<th>फोटो काडा</th>
+						<th>Delete User</th>
+					</tr>
+					</thead>
+					<% for user in @users %>
+						<tbody>
+						<tr>
+							<td>
+								<p><% if user.first_name != nil %>
+										<%= user.first_name %>
+									<% end %>
+								<% if user.middle_name != nil %>
+									<%= user.middle_name %>
+								<% end %>
+								<% if user.last_name != nil %>
+									<%= user.last_name %>
+								<% end %>
+								</p>
+							</td>
+							<td><p>
+								<% if user.phone != nil %>
+									<%= user.phone %></p>
+								<% end %>
+							</td>
+							<td><p>
+
+								<% if user.post != nil %>
+
+									<%= user.post %>
+
+								<% end %>
+
+							</p></td>
+
+							<td><p>
+
+								<% if user.adhikari_type != nil %>
+
+									<%= user.adhikari_type.humanize %>
+
+								<% end %>
+
+							</p></td>
+
+							<td><p>
+
+								<% if user.work_at_district != nil %>
+
+									<%= user.work_at_district.humanize %>
+
+								<% end %>
+
+							</p></td>
+							<td><p><%= link_to user.email, edit_user_path(user) %></p>
+							</td>
+							<td><p><%= simple_form_for([user]) do |f| %>
+									<% if user.avatar? %>
+										<%= f.check_box :remove_avatar %>
+										<%= f.submit "remove avatar" %>
+									<% end %>
+								<% end %></p>
+							</td>
+							<td><p><%= link_to "Delete User", user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this user and all of its content"} , class: "btn btn-danger btn-sm btn-responsive" %></p>
+							</td>
+						</tr>
+						</tbody>
+					<% end %>
+				</table>
+			<% else %>
+				<h3 align="center">No Users have registered yet..!</h3>
+			<% end %>
+		</div>
+		</div>
+	<% else %>
+   		<p>You are not allowed here, go back to your home page. <%= link_to "click here", homepage_path(current_user) %> </p>
+	<% end %>
+</div>
+
+
+
+
+
