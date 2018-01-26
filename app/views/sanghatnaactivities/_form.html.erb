@@ -1,7 +1,13 @@
-<%= simple_form_for @sanghatnaactivity do |f| %>
-	<%= f.input :title,label: "शीर्षक" %>
-	<%= f.input :description,label: "वर्णन"  %>
-	<%= f.input :event_date, label: "तारीख" %>
+<%= tinymce %>
+<%= form_for @sanghatnaactivity do |f| %>
+
+	<h4>शीर्षक</h4>
+	<%= f.text_area :title,label: "शीर्षक" , class: 'tinymce' %>
+	<h4>वर्णन</h4>
+	<%= f.text_area :description,label: "वर्णन" , class: 'tinymce'  %>
+	<h4>तारीख</h4>
+	<%= f.date_select :event_date, label: "तारीख"%>
+
 	<p>Photo</p>
 	<%= f.file_field :photo,label: "add file" %>
 	<p>Attachment</p>

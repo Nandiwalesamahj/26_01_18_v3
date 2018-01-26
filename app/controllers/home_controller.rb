@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+	require 'time'
+	
 	def homepage
 		@manogats = Manogat.all.order("created_at ASC")
 		for manogat in @manogats
@@ -80,6 +82,8 @@ class HomeController < ApplicationController
 				break
 			end
 		end
+		@vadhuvars_male = Vadhuvar.where(:gender => "पुरूष", :public => "Yes")
+		@vadhuvars_female = Vadhuvar.where(:gender => "स्त्री", :public => "Yes")
 		@vadhuvars = Vadhuvar.all.order("created_at DESC")
 		@vadhuvar = Vadhuvar.new
 		if user_signed_in?
@@ -112,6 +116,7 @@ class HomeController < ApplicationController
 		end
 	end
 	def mahatvachevyakti
+		@flag = 0
 		@summary =  Summary.new
 		@summary_exists = Summary.all
 		for summary_exist in @summary_exists
@@ -119,6 +124,34 @@ class HomeController < ApplicationController
 				@summary_exist = summary_exist
 				break
 			end
+		end
+		@users = User.where(user_type: "Super_admin")
+		if @users.size > 0
+				for user in @users
+					@user = user
+					break
+				end
+			end
+		@sheets = Excelattach.where(user_id: @user.id)
+			if @sheets.size > 0
+				for ex in @sheets
+					@sheet = ex
+					@flag = 1
+					break
+				end
+			end
+		if user_signed_in? && current_user.user_type == "Super_admin"
+			@sheets = Excelattach.where(user_id: current_user.id)
+			if @sheets.size > 0
+				for ex in @sheets
+					@sheet = ex
+					@flag = 1
+					break
+				end
+			else
+				@sheet = Excelattach.new 
+			end
+
 		end
 		@importantpeople = Mahatvachevyakti.all.order("created_at DESC").page(params[:page]).per_page(10)
 		@importantperson = Mahatvachevyakti.new

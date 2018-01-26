@@ -1,7 +1,6 @@
 <div class="row">
-<%= render 'home/sidebar' %>
 <h2 align="center" class="margin-bottom"><strong>Advertises</strong></h2>
-    <div class="col-xs-10">
+    <div class="col-xs-12">
     <% if user_signed_in? && current_user.user_type == "Super_admin" %>
     <%= link_to 'New Advertise', new_advertise_path , class: "btn btn-info btn-sm btn-responsive" %>
     <hr>

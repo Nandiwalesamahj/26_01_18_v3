@@ -12,6 +12,7 @@ class TantamuktisController < ApplicationController
 			if @tantamukti.save
 				current_user.tanta_mukti_created = "Yes"
 				current_user.save
+				AllMailer.tanta_new(@tantamukti).deliver_now
 				redirect_to tanta_mukti_samiti_home_path
 			end
 		end

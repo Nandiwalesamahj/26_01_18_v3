@@ -1,5 +1,5 @@
 class FeedbacksController < ApplicationController
-
+	
 	def show
 		@feedback = Feedback.find(params[:id])
 	end
@@ -25,10 +25,19 @@ class FeedbacksController < ApplicationController
 		end
 		@feedback.user_id = current_user.id
 		if @feedback.save
+			AllMailer.feedbacks_new(@feedback).deliver_now
 			redirect_to feedbacks_path
 		end
 	end
-
+	def show_feedback
+		@search = Feedback.search do
+			fulltext params[:search]
+		end
+		@feedbacks = @search.results
+	end
+	def feedback_titles
+		@feedbacks = Feedback.all.order("created_at DESC").page(params[:page]).per_page(30)
+	end
 
 
 	def destroy

@@ -1,101 +1,125 @@
+<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+<h2 align="center"><strong>सगळे वधुवर</strong></h2>
+<hr>
 <div class="row">
-<%= render 'home/sidebar' %>
-<h2 align="center" class="margin-bottom2"><strong>सगळे वधुवर</strong></h2>
-	<div class="col-xs-10">
-	<hr>
-	<div class="row">
-		<div class="col-xs-6">
-			<% if  @vadhuvars_male != nil &&  @vadhuvars_male.size > 0 %> 
-				<div class="table-responsive">
-				<table class="table2">
-					<thead>
-						<tr>
-							<th>फोटो</th>
-							<th>माहिती</th>
-						</tr>
-					</thead>
-					<col width="200">
-					<col width="400">
-					<% count = 0 %>
-					<% for member1 in @vadhuvars_male %>
-						<% if member1.vadhuvar_approval == "Yes" %>
-							<tbody>
-								<tr>
-								<td>
-									<% if member1.photo? %>
-										<%= image_tag((member1.photo),class: "karmchari-img image-responsive") %>
-									<% end %>
-								</td>	
-								<td>
-									<p align="left" class="margin-left">
-										<b>नाव:</b>	<%= member1.vadhuvar_name %>
-									</p> 
-									<p align="left" class="margin-left">
-										<b>जन्म तारीख:</b>	<%= member1.birth_date %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>उंची:</b><%= member1.height %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>वजन:</b><%= member1.weight %> kg
-									</p>
-									<p align="left" class="margin-left">
-										<b>मोबाइल:</b><%= member1.phone_number %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>शिक्षण:</b><%= member1.education %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>रक्त गट:</b><%= member1.blood_group %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>पगार:</b><%= member1.salary %> Rs
-									</p>
-									<p align="left" class="margin-left">
-										<b>व्यवसाय:</b><%= member1.occupation %>
-									</p> 
-									<p align="left" class="margin-left">
-										<b>वडिलांचे नाव:</b><%= member1.father_name %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>आईचे नाव:</b><%= member1.mother_name %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>मामाचे नाव:</b><%= member1.uncle_name %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>कूळ:</b><%= member1.sub_caste %>
-									</p>
-									<p align="left" class="margin-left">
-										<b>पत्ता:</b><%= member1.address %>
-									</p>
-									<p align="left" class="margin-left">	
-										<b>अपेक्षा:</b><%= member1.expecations %> 
-									</p>
-									<p align="left" class="margin-left"> 
-										<b>स्वतः विषयी:</b><%= member1.bio %>
-									</p>
-								</td>
-								</tr>
-							</tbody>
-							<% count = count + 1 %>
-						<% end %>
-					<% end %>
-					<% if count == 0 %>
+<div class="col-xs-6">
+	<h3>पुरुष/वर :- </h3>
+	<br/>
+	<% if  @vadhuvars_male != nil &&  @vadhuvars_male.size > 0 %> 
+		<div class="table-responsive">
+			<table class="table2">
+				<thead>
+					<tr>
+						<th>फोटो</th>
+						<th>माहिती</th>
+					</tr>
+				</thead>
+				<col width="200">
+				<col width="400">
+				<% count = 0 %>
+				<% for member1 in @vadhuvars_male %>
+					<% if member1.vadhuvar_approval == "Yes" %>
 						<tbody>
 							<tr>
-								<td>N.A.</td>
-								<td>N.A.</td>
+							<td>
+								<% if member1.photo? %>
+									<%= image_tag((member1.photo),class: "karmchari-img image-responsive") %>
+								<% end %>
+							</td>	
+							<td>
+								
+								<p align="left">
+										<b>ID:</b><%= member1.id %>
+									</p>
+								<%= simple_form_for member1 do |f| %>
+									<%= f.input :public, collection: [:Yes, :No],label: "सार्वजनिक करा" %>
+									<%= f.submit "Save" %>
+								<% end %>
+
+								<p align="left">
+									<b>नाव:</b>	<%= member1.vadhuvar_name %>
+								</p> 
+								<p align="left">
+									<b>जन्म तारीख:</b>	<%= member1.birth_date %>
+								</p>	<p align="left">
+										<b>वय:</b>	<%= member1.age %>
+									</p>
+									<p align="left">
+										<b>रंग:</b>	<%= member1.color %>
+									</p>
+								<p align="left">
+									<b>उंची:</b><%= member1.height %>
+								</p>
+								<p align="left">
+									<b>वजन:</b><%= member1.weight %> kg
+								</p>
+								<p align="left">
+									<b>मोबाइल:</b><%= member1.phone_number %>
+								</p>
+								<p align="left">
+									<b>शिक्षण:</b><%= member1.education %>
+								</p>
+								<p align="left">
+									<b>रक्त गट:</b><%= member1.blood_group %>
+								</p>
+								<p align="left">
+									<b>पगार:</b><%= member1.salary %> Rs
+								</p>
+								<p align="left">
+									<b>व्यवसाय:</b><%= member1.occupation %>
+								</p> 
+								<p align="left">
+									<b>वडिलांचे नाव:</b><%= member1.father_name %>
+								</p>
+								<p align="left">
+									<b>आईचे नाव:</b><%= member1.mother_name %>
+								</p>
+								<p align="left">
+									<b>मामाचे नाव:</b><%= member1.uncle_name %>
+								</p>
+								<p align="left">
+									<b>कूळ:</b><%= member1.sub_caste %>
+								</p>
+								<p align="left">
+									<b>पत्ता:</b><%= member1.address %>
+								</p>
+								<p align="left">	
+									<b>अपेक्षा:</b><%= member1.expecations.html_safe %> 
+								</p>
+								<p align="left">	
+								<p><b>अपेक्षा:</b></p>
+								<p class="margin-left"><b>रंग:</b><%= member1.exp_color %></p>
+								<p class="margin-left"><b>वय:</b><%= member1.exp_age %></p>
+								<p class="margin-left"><b>उंची:</b><%= member1.exp_height %></p>
+								<p class="margin-left"><b>शिक्षण:</b><%= member1.exp_education %></p>
+								<p class="margin-left"><b>वजन:</b><%= member1.exp_weight %></p> 
+								</p>
+								<p align="left"> 
+									<b>स्वतः विषयी:</b><%= member1.bio.html_safe %>
+								</p>
+							</td>
 							</tr>
 						</tbody>
+						<% count = count + 1 %>
 					<% end %>
-				</table>					
-				</div>	
-			<% else %>
-				<h3> कोणतेही वर जोडलेले नाहीत!</h3>
-			<% end %>
-		</div>
-		<div class="col-xs-6">
+				<% end %>
+				<% if count == 0 %>
+					<tbody>
+						<tr>
+							<td>N.A.</td>
+							<td>N.A.</td>
+						</tr>
+					</tbody>
+				<% end %>
+			</table>					
+			</div>	
+	<% else %>
+		<h3> कोणतेही वर जोडलेले नाहीत!</h3>
+	<% end %>
+</div>
+<div class="col-xs-6">
+	<h3>स्त्री/वधु :- </h3>
+	<br/>
 			<% if  @vadhuvars_female != nil &&  @vadhuvars_female.size > 0 %> 
 				<div class="table-responsive">
 				<table class="table2">
@@ -118,53 +142,75 @@
 									<% end %>
 								</td>	
 								<td>
-									<p align="left" class="margin-left">
-										<b>नाव:</b>	<%= member2.vadhuvar_name %>
+									<p align="left">
+										<b>ID:</b><%= member2.id %>
+									</p>
+									<%= simple_form_for member2 do |f| %>
+										<%= f.input :public, collection: [:Yes, :No],label: "सार्वजनिक करा" %>
+										<%= f.submit "Save" %>
+									<% end %>
+									<p align="left">
+										<b>नाव:</b>	<%= member2.vadhuvar_name %> <%= member2.vadhuvar_sirname %>
 									</p> 
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>जन्म तारीख:</b>	<%= member2.birth_date %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
+										<b>वय:</b>	<%= member2.age %>
+									</p>
+									<p align="left">
+										<b>रंग:</b>	<%= member2.color %>
+									</p>
+									
+									<p align="left">
 										<b>उंची:</b><%= member2.height %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>वजन:</b><%= member2.weight %> kg
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>मोबाइल:</b><%= member2.phone_number %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>शिक्षण:</b><%= member2.education %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>रक्त गट:</b><%= member2.blood_group %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>पगार:</b><%= member2.salary %> Rs
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>व्यवसाय:</b><%= member2.occupation %>
 									</p> 
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>वडिलांचे नाव:</b><%= member2.father_name %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>आईचे नाव:</b><%= member2.mother_name %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>मामाचे नाव:</b><%= member2.uncle_name %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>कूळ:</b><%= member2.sub_caste %>
 									</p>
-									<p align="left" class="margin-left">
+									<p align="left">
 										<b>पत्ता:</b><%= member2.address %>
 									</p>
-									<p align="left" class="margin-left">	
-										<b>अपेक्षा:</b><%= member2.expecations %> 
+									<p align="left">	
+										<b>अपेक्षा:</b><%= member2.expecations.html_safe %> 
 									</p>
-									<p align="left" class="margin-left"> 
-										<b>स्वतः विषयी:</b><%= member2.bio %>
+									<p align="left">	
+								<p><b>अपेक्षा:</b></p>
+								<p class="margin-left"><b>रंग:</b><%= member2.exp_color %></p>
+								<p class="margin-left"><b>वय:</b><%= member2.exp_age %></p>
+								<p class="margin-left"><b>उंची:</b><%= member2.exp_height %></p>
+								<p class="margin-left"><b>शिक्षण:</b><%= member2.exp_education %></p>
+								<p class="margin-left"><b>वजन:</b><%= member2.exp_weight %></p> 
+							</p>
+									<p align="left"> 
+										<b>स्वतः विषयी:</b><%= member2.bio.html_safe %>
 									</p>
 								</td>
 								</tr>
@@ -186,6 +232,7 @@
 				<h3> कोणतेही वधु जोडलेले नाहीत!</h3>
 			<% end %>
 		</div>
-	</div>
-	</div>
 </div>
+<% else %>
+<h3><strong>Access Denied</strong></h3>
+<% end %>

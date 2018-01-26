@@ -1,13 +1,23 @@
-<div class="row">
-<%= render 'home/sidebar' %>
+
 <h2 align="center"> Zilla Sanghatna Disapproval </h2>
-	<div class="col-xs-10">
-	<hr>
-	<div class="row col-xs-offset-1">
+<hr>
+	<div class="row">
+	<div class="col-xs-12">
+		<div class="links-box">
+			<p class="link-options">
+			<%= link_to "Rajya Sanghatna Disapproval", rajya_disapproval_path %> &emsp;
+			<%= link_to "Yuva Sanghatna Disapproval", yuva_disapproval_path %> &emsp;
+			<%= link_to "Zilla Sanghatna Disapproval", zilla_disapproval_path , class: "btn btn-sm btn-danger btn-responsive" %> &emsp;
+			<%= link_to "VadhuVar Disapproval", vadhuvar_disapproval_path %> &emsp;
+			<%= link_to "Tanta_mukti Samiti Disapproval", tanta_mukti_disapproval_path %> &emsp;
+	 		</p>
+				</div>
+			<br/>
+	<div class="col-xs-8 col-xs-offset-2">
 	<% if user_signed_in? && current_user.user_type == "Super_admin" %>
 			<% if @users.size > 0 %>	
-			<div class="table-responsive">
-     		<table class="table2">
+			<div class= "table-responsive">
+     		<table class="table1">
      			<col width="200">
      			<col width="400">
 	     		<thead>
@@ -24,13 +34,14 @@
 							<td><%= user.full_name %></td>
 							<td><%= f.input :zilla_approval, collection: [:Yes, :No], as: :radio_buttons %>
 							<%= f.submit "Approve" %></td>
-							<% end %>
+							
 
 							<% elsif user != nil && user.first_name != nil && user.last_name != nil %>
                        <td><%= user.first_name + " " + user.last_name %></td>
                         <td><%= f.input :zilla_approval, collection: [:Yes, :No], as: :radio_buttons %>
                         <%= f.submit "Approve" %></td>
 			<% end %>
+						<% end %>
 						</tr>
 				<% end %>
 				</tbody>

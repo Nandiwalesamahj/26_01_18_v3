@@ -1,31 +1,28 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-<div class="col-xs-10">
+<%= tinymce %>
 <h2 align="center"><strong>समाजाविषयी</strong></h2>	
-<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :aboutsamaj_summary, label: "समाजाविषयी सारांश" %>
-		<%= f.submit "Update" %>
-	<% end %>
-<% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :aboutsamaj_summary, label: "समाजाविषयी सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :aboutsamaj_summary, label: "समाजाविषयी सारांश",class: "tinymce" %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :aboutsamaj_summary, label: "समाजाविषयी सारांश",class: "tinymce" %>
 			<%= f.submit "Save" %>
-	<% end %>
-<% end %>
-	</div>
+			<% end %>
+		<% end %>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 class="margin-bottom2"><%= simple_format(@summary_exist.aboutsamaj_summary) %></h4>
+		<% if @summary_exist != nil %>
+			<h4 class="box-summary"><%= @summary_exist.aboutsamaj_summary.html_safe %></h4>
+		<% end %>
 	<% end %>
-	<% end %>
+
 	<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-		<%= link_to "नवीन समाजजातीविषयी माहिती",new_aboutsamaj_path, class: "btn btn-info btn-sm" %>
+		<%= link_to "नवीन समाजजातीविषयी माहिती",new_aboutsamaj_path, class: "btn btn-primary btn-sm btn-responsive" %>
 	<% end %>
 	<hr>
+
 	<div class="row">
 		<div class="col-xs-8">
 		<% if @about_samajs != nil && @about_samajs.size > 0 %>
@@ -43,13 +40,15 @@
 					<% for about_samaj in @about_samajs %>
 						<tbody>
 							<tr>
-							<td align="center"><%= count %></td>
+							<td align="center" class="margin-left"><strong><%= count %></strong></td>
 							<td>
-								<p align="left" class="margin-left"><b><%= about_samaj.title %></b></p>
-							 	<p align="left" class="margin-left"><%= simple_format(about_samaj.description) %></p>
-							<p align="left" class="margin-left">
+								<p><b><%= about_samaj.title.html_safe %></b></p>
+								<hr>
+							 	<p><%= about_samaj.description.html_safe %></p>
+							 	<hr>
+								<p>
 									<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-										<%= link_to "Edit", edit_aboutsamaj_path(about_samaj) , class: "btn btn-warning btn-sm btn-responsive" %> 
+										<%= link_to "Edit", edit_aboutsamaj_path(about_samaj) , class: "btn btn-primary btn-sm btn-responsive" %> 
 										<%= link_to "Delete", aboutsamaj_path(about_samaj),method: :delete ,class: "btn btn-danger btn-sm btn-responsive"%>
 									<% end %>
 								</p>
@@ -69,14 +68,11 @@
 				<div class="panel-heading">
 					<h3>जाहिरात</h3>
 				</div>
-					<div class="panel-body scrollable">
-					<div class="advertisement-box">
-					
-					</div>
-			<% if @ads.size > 0 %>
+				<div class="panel-body scrollable">
+				<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">
-						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<p class="underline-text"><strong><%= ad.title %></strong></p>
 						<% if ad.photo? %>
 							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
 						<% end %>
@@ -84,9 +80,7 @@
 					</div>
 			    <% end %>
 			<% end %>
-		</div>
+			</div>
 			</div>	
 		</div>
 	</div>
-	</div>
-</div>

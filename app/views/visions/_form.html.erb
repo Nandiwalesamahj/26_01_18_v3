@@ -1,6 +1,9 @@
+<%= tinymce %>
 <%= simple_form_for @vision do |f| %>
-	<%= f.input :description,label: "वर्णन" %>
-	<%= f.submit "सबमिट करा" %>
+<h3> वर्णन</h3>
+	<%= f.text_area :description,  class: 'tinymce' %>
+	<br>
+	<%= f.submit "सबमिट करा",class: "btn btn-default" %>
 <% end %>
 
 

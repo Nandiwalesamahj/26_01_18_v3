@@ -8,6 +8,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_create :send_to_admin
+
+  def send_to_admin
+  	AllMailer.user_new(self).deliver_now	
+  end
+
+
    def full_name
    	first_name + " " + middle_name + " " + last_name
    end
@@ -32,4 +39,6 @@ class User < ApplicationRecord
 	def self.matches(field_name, param)
 		where("lower(#{field_name}) like ?", "#{param}")
 	end
+	validates :first_name,:last_name,:middle_name,:phone,
+	:presence => true
 end

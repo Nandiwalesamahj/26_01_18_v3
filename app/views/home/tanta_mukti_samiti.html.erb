@@ -1,42 +1,41 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
-	<h3 align="center"">तंटा मुक्‍ती समिती</h3>
+<%= tinymce %>
+<h2 align="center"><strong>तंटा मुक्‍ती समिती</strong></h2>
+	
 	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
+	
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :Tantamukti_summary, label: "तंटा मुक्‍ती समिती सारांश" %>
+	<%= form_for @summary_exist do |f| %>
+		<%= f.text_area :Tantamukti_summary, label: "तंटा मुक्‍ती समिती सारांश" ,class: "tinymce" %>
 		<%= f.submit "Update" %>
 	<% end %>
 <% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :Tantamukti_summary, label: "तंटा मुक्‍ती समिती सारांश" %>
+	<%= form_for @summary do |f| %>
+			<%= f.text_area :Tantamukti_summary, label: "तंटा मुक्‍ती समिती सारांश",class: "tinymce" %>
 			<%= f.submit "Save" %>
 	<% end %>
 <% end %>
-	</div>
+	
 	<% else %>
 	<% if @summary_exist != nil %>
-	<h4 class="margin-bottom2"><%= simple_format(@summary_exist.Tantamukti_summary) %></h4>
+	<h4 class="box-summary"><%= @summary_exist.Tantamukti_summary.html_safe %></h4>
 	<% end %>
 	<% end %>
 	<hr>
+
 	<div class="row">
 		<div class="col-xs-8">
+			<div class="box-vadhuvar-form">
 		<% if  @tantamuktis != nil &&  @tantamuktis.size > 0 %>
 			<div class="table-responsive">
-	    	<table class="table2">
+	    	<table class="table table-bordered table-stripped">
 	    		<col width="200">
 				<col width="500">
 				<thead>
 					<tr>
 					<th>फोटो</th>
-					<th> माहिती</th>
+					<th>माहिती</th>
 					</tr>
 				</thead>
-
 				<% for member in @tantamuktis %>
 					<% if member.tantamukti_approval == "Yes" %>
 						<tbody>
@@ -46,12 +45,18 @@
 									<%= image_tag((member.photo.url),class: "manogat-img image-responsive") %>
 								<% end %>
 							</td>
-							<td>	
-								<p align="left" class="margin-left"><b>नाव :</b><%= member.user_name %></p>
-								<p align="left" class="margin-left"><b>पदनाम :</b> <%= member.post %></p>		
-								<p align="left" class="margin-left"><b>कार्यक्षेञ :</b> <%= member.work_field %></p>
-								<p align="left" class="margin-left"><b>मोबाइल नंबर :</b><%= member.phone_number %></p>
-								<p align="left" class="margin-left"><b>पत्ता :</b> <%= member.address %></p>
+							<td>
+							<table class="table2">
+								<col width="100">
+								<col width="600">
+								<tbody>
+									<tr><td><b>नाव</b></td><td><%= member.user_name %></td></tr>
+									<tr><td><b>पदनाम </b></td><td><%= member.post %></td></tr>
+									<tr><td><b>कार्यक्षेञ</b></td><td> <%= member.work_field %></td></tr>
+									<tr><td><b>मोबाइल नंबर</b></td><td><%= member.phone_number %></td></tr>
+									<tr><td><b>पत्ता</b></td><td><%= member.address.html_safe %></td></tr>
+								</tbody>
+							</table>	
 							</td>
 							</tr>
 						</tbody>
@@ -60,8 +65,9 @@
 			</table>
 			</div>
 		<% else %>
-			<p>समितीचे सदस्य या क्षणी उपलब्ध नाहीत</p>
+			<h3>समितीचे सदस्य या क्षणी उपलब्ध नाहीत</h3>
 		<% end %>
+		</div>
 		</div>
 		<div class="col-xs-4">
 			<div class="panel panel-default">
@@ -76,6 +82,7 @@
 							<%= simple_form_for @tantamukti_pass do |f| %>
 								<p><b>फोटो</b></p>
 								<%= f.file_field :photo %>
+								<br/>
 								<%= f.input :user_name,label: "नाव" %>
 								<%= f.input :post,label: "पदनाम" %>
 								<%= f.input :work_field, label: "कार्यक्षेञ	" %>

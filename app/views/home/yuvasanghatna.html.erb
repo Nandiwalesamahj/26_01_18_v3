@@ -1,75 +1,82 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-	<div class="col-xs-10">
-<h2 align="center"><strong>युवा संघटना (Yuva Sanghatna)</strong></h2>
-<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
+<%= tinymce %>
+<h2 align="center"><strong>युवा संघटना</strong></h2>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
 		<% if @summary_exist != nil %>
-			<%= simple_form_for @summary_exist do |f| %>
-				<%= f.input :Yuva_sanghatna_summary, label: "युवा संघटना पदाधिकारी सारांश" %>
-				<%= f.submit "Update" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :Yuva_sanghatna_summary, label: "युवा संघटना पदाधिकारी सारांश" , class: 'tinymce'%>
+			<%= f.submit "Update" %>
 			<% end %>
 		<% else %>
-			<%= simple_form_for @summary do |f| %>
-					<%= f.input :Yuva_sanghatna_summary, label: "युवा संघटना पदाधिकारी सारांश" %>
-					<%= f.submit "Save" %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :Yuva_sanghatna_summary, label: "युवा संघटना पदाधिकारी सारांश" , class: 'tinymce'%>
+			<%= f.submit "Save" %>
 			<% end %>
 		<% end %>
-	</div>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 class="margin-bottom2"><%= simple_format(@summary_exist.Yuva_sanghatna_summary) %></h4>
-	<% end %>
+		<% if @summary_exist != nil %>
+			<h4 class="box-summary"><%= @summary_exist.Yuva_sanghatna_summary.html_safe %></h4>
+		<% end %>
 	<% end %> 
 	<hr>
+
 	<div class="row">
-		<div class="col-xs-8">	
-		<% if  @r_members!= nil &&  @r_members.size > 0 %>
+		<div class="col-xs-8">
+		<div class="box-vadhuvar-form">	
+		<% if  @r_members != nil &&  @r_members.size > 0 %>
 			<div class="table-responsive">
-	    	<table class="table2">
+	    	<table class="table table-striped table-bordered">
 	    		<col width="200">
 				<col width="500">
 				<thead>
 					<tr>
 					<th>फोटो</th>
-					<th> माहिती</th>
+					<th>माहिती</th>
 					</tr>
 				</thead>
 				<% for user in @r_members %>
 					<% if user.yuva_approval == "Yes" %>
 						<tbody>
-						<tr>
-						<td>
-							<% if user.avatar? %>
+							<tr>
+							<td>
+								<% if user.avatar? %>
 									<%= image_tag((user.avatar.url),class: "manogat-img image-responsive") %>
-							<% else %>
-								<% if user.gender == "Male" %>
-									<%= image_tag('male-no-avatar.png')%>
-								<% elsif user.gender == "Female" %>
-									<%= image_tag('female-no-avatar.png')%>
+								<% else %>
+									<% if user.gender == "Male" %>
+										<%= image_tag('male-no-avatar.png')%>
+									<% elsif user.gender == "Female" %>
+										<%= image_tag('female-no-avatar.png')%>
+									<% end %>
 								<% end %>
-							<% end %>
-						</td>
-						<td>
-						<% if user.first_name != nil && user.last_name != nil && user.middle_name != nil %>
-							<p align="left" class="margin-left"><b>नाव :</b><%= user.full_name %></p>
-						<% end %>
-							<p align="left" class="margin-left"><b>पदनाम :</b><%= user.post %></p>
-							<p align="left" class="margin-left"><b>कालावधी :</b><%= user.tenure %></p>
-							<p align="left" class="margin-left"><b>फोन नंबर :</b><%= user.phone %></p>
-							<p align="left" class="margin-left"><b>पत्ता :</b><%= simple_format(user.address) %></p>
-							<p align="left" class="margin-left"><b>स्वतः विषयी :</b><%= simple_format(user.bio) %></p>
-						</td>
-						</tr>
+							</td>
+							<td>
+								<div class="table-responsive">
+								<table class="table2">
+								<col width="100">
+								<col width="600">
+								<tbody>
+									<% if user.first_name != nil && user.last_name != nil && user.middle_name != nil %>
+										<tr><td><b>नाव</b></td><td><%= user.full_name %></td></tr>
+										<tr><td><b>पदनाम</b></td><td><%= user.post %></td></tr>
+										<tr><td><b>कालावधी</b></td><td><%= user.tenure %></td></tr>
+										<tr><td><b>फोन नंबर</b></td><td><%= user.phone %></td></tr>
+										<tr><td><b>पत्ता</b></td><td><%= simple_format(user.address) %></td></tr>
+										<tr><td><b>स्वतः विषयी</b></td><td><%= simple_format(user.bio) %></td></tr>
+									<% end %>	
+								</tbody>
+								</table>
+							</div>
+							</td>
+							</tr>
 						</tbody>
 					<% end %>
 				<% end %>
 			</table>
 			</div>
 		<% else %>
-			<h3 align="center">युवा संघटना मेमबर्स डेटाबेसमध्ये नाहीत, प्रशासकाशी संपर्क साधा</h3>
+			<h3>युवा संघटना मेमबर्स डेटाबेसमध्ये नाहीत, प्रशासकाशी संपर्क साधा</h3>
 		<% end %>
 <%= will_paginate @r_members, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>		
+</div>
 </div>
 		<div class="col-xs-4">
 			<div class="panel panel-default">
@@ -77,9 +84,6 @@
 					<h3>जाहिरात</h3>
 				</div>
 					<div class="panel-body scrollable">
-					<div class="advertisement-box">
-					  
-					</div>
 			<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">

@@ -1,0 +1,15 @@
+<h2 align="center"><strong>सर्व प्रतिक्रीया</strong></h2>
+<hr>
+<div class="col-xs-6 col-xs-offset-3 box-shadow1">
+	<% if @feedbacks != nil && @feedbacks.size > 0 %>
+<% count = 1 %>
+	<% for feedback in @feedbacks %>			
+		<h4><b><%= count %> . </b><%= link_to feedback.title.html_safe, show_feedback_path(passed_id: feedback.id) %></h4>
+		<% count = count + 1 %>
+	<% end %>
+<% else %>
+	<h3>प्रतिक्रीया लिहा!</h3>
+<% end %>
+</div>
+
+<%= will_paginate @feedbacks, :renderer =>  BootstrapPagination::Rails %>

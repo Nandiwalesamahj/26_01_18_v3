@@ -12,27 +12,43 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
-   <div class="margin-main-div">
-  
   <body class="bg">
-   <div class="col-xs-12">
-  <div class="row">
-    <div class="col-xs-2">
-    <div align="left">
-      <%= image_tag(('logo.jpg'),class: "image-responsive-logo img2 margin-logo") %>
-    </div>
-    </div>
-    <div class="col-xs-10">
-      <h1 align="center" class="box-title"> अखिल महाराष्ट्र राज्य नंदीवाले समाज संघटना </h1>
-        <%= render 'layouts/navbar' %>
-  </div>
-  <hr>
-  </div>
+    <%= render 'layouts/navbar' %>
   
-    <%= yield %>
-   </div>  
-  </body>
- 
+      <div class="col-xs-2">
+        <%= render 'layouts/sidebar' %>
+      </div>
+    
+
+  <script type="text/javascript">
+   tinymce.init({
+  selector: 'textarea',
+  theme: 'modern',
+  force_br_newlines : false,
+  force_p_newlines : false,
+  convert_fonts_to_spans : false,
+  branding: false,
+  plugins: 'table colorpicker emoticons textcolor ',
+  toolbar1: 'bold italic strikethrough forecolor backcolor | fontsizeselect | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | emoticons',
+  image_advtab: true,
+  templates: [
+    { title: 'Test template 1', content: 'Test 1' },
+    { title: 'Test template 2', content: 'Test 2' }
+  ],
+  content_css: [
+    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    '//www.tinymce.com/css/codepen.min.css'
+  ]
+ });
+
+  </script>
+  <div class="col-xs-10">
+  <p align="right">
+    <b>कोणत्याही समस्या उद्भवल्यास पृष्ठ रीफ्रेश करण्यासाठी करा<input type="button" value=" येथे क्लिक" onClick="window.location.href=window.location.href">करा</b>
+  </p>
+      <%= yield %>
   </div>
+  </body>
+
   
 </html>

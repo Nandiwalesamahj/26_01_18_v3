@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-xs-8">
+	<h3>प्रतिक्रिया शोध </h3>        
+        <p><%= form_tag show_feedback_path, method: :get do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Enter", autofocus: true,
+              class: 'form-control search-box input-sm' %>
+
+          <%= submit_tag "Search", class: 'btn btn-sm btn-success' %>
+        <% end %></p>
+        <br/>
+    	<%= link_to "शीर्षकानुसार प्रतिक्रिया यादी",feedback_titles_path, class: "btn btn-sm btn-primary btn-responsive" %>
+    	<hr>	
+	</div>
+	</div>
+<% if @feedbacks != nil && @feedbacks.size > 0%>
+					<% for feedback in @feedbacks %>
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h4><strong><%= feedback.title.html_safe %></strong></h4>
+							</div>
+							<div class="panel-body">
+								<p><%= simple_format(feedback.description) %></p>
+							</div>
+							<div class="panel-footer">
+								<p>ID :<b><%= feedback.id %></b></p>
+								<p>Posted by :<b><%= feedback.user_name %></b></p>
+								<p>Posted on :<b><%= feedback.created_at.strftime("%d/%m/%Y | %l:%M %P") %></b></p>
+							<% if user_signed_in? && feedback.user_id == current_user.id %>
+								
+									<%= link_to "Delete", feedback_path(feedback),method: :delete,class: "btn btn-danger btn-sm btn-responsive" %>
+								
+							<% end %>
+							</div>
+						</div>
+					<% end %>
+				<% else %>
+					<h3>अशी कोणतीही प्रतिक्रिया डाटाबेस मध्ये नाही </h3>
+				<% end %>
+					 <%= will_paginate @feedbacks, :renderer =>  BootstrapPagination::Rails %>

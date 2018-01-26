@@ -1,8 +1,17 @@
-<div class="row">
-<%= render 'home/sidebar' %>
+
 <h2 align="center"><strong>सेवादाते</strong></h2>
 <hr>
-	<div class="col-xs-10">
+	<div class="links-box">
+			<p class="link-options"><b><%= link_to "प्रतिष्ठीत मंडळाचे सदस्य",pratishtit_manadal_path%> &emsp;
+			<%= link_to "पुरस्कार प्राप्त",puraskar_prapt_path%> &emsp;
+			<%= link_to "समाजातील पंच",samajatil_panch_path %> &emsp;
+			<%= link_to "उद्योजक ",uddyojak_path %> &emsp;
+			<%= link_to "व्यापारी",vyapari_path %> &emsp;
+			<%= link_to "सेवादाते",sevadatey_path , class: "btn btn-danger btn-md btn-responsive" %> &emsp;
+			<%= link_to "समाज बांधव",samaj_bandhav_path %> &emsp;
+			<%= link_to "शासकीय कर्मचारी", shaskiya_karmachari_path%></b> </p>
+	</div>
+	<br/>
 	<% if  @importantpeople!= nil &&  @importantpeople.size > 0 %>
 			<div class="table-responsive">
 	    	<table class="table2">
@@ -53,7 +62,5 @@
 			</table>
 			</div>
 		<% else %>
-			<h3 align="center">समाजातील महत्‍वाच्‍या व्‍यक्‍ती डेटाबेसमध्ये आढळला नाही, त्यांना जोडण्यासाठी प्रशासनाशी संपर्क साधा.</h3>
+			<h3>समाजातील महत्‍वाच्‍या व्‍यक्‍ती डेटाबेसमध्ये आढळला नाही, त्यांना जोडण्यासाठी प्रशासनाशी संपर्क साधा.</h3>
 		<% end %>
-	</div>
-</div>

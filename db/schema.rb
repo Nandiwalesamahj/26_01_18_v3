@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814185321) do
+ActiveRecord::Schema.define(version: 20180126094643) do
 
   create_table "aboutsamajs", force: :cascade do |t|
     t.string   "title",       null: false
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "excelattaches", force: :cascade do |t|
+    t.string   "excel"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description", null: false
@@ -40,6 +47,12 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "summary"
+  end
+
+  create_table "galleries", force: :cascade do |t|
+    t.string   "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "helps", force: :cascade do |t|
@@ -66,6 +79,13 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "attachment"
+  end
+
+  create_table "impressions", force: :cascade do |t|
+    t.integer  "total_visitors"
+    t.integer  "today_visitors"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "mahatvachevyaktis", force: :cascade do |t|
@@ -100,13 +120,34 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "punches", force: :cascade do |t|
+    t.integer  "punchable_id",                          null: false
+    t.string   "punchable_type", limit: 20,             null: false
+    t.datetime "starts_at",                             null: false
+    t.datetime "ends_at",                               null: false
+    t.datetime "average_time",                          null: false
+    t.integer  "hits",                      default: 1, null: false
+    t.index ["average_time"], name: "index_punches_on_average_time"
+    t.index ["punchable_type", "punchable_id"], name: "punchable_index"
+  end
+
   create_table "recruitments", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "title"
-    t.string   "description"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "attachment"
     t.text     "summary"
+    t.string   "r_name"
+    t.string   "education"
+    t.string   "technical_education"
+    t.string   "phone_no"
+    t.string   "experience_post"
+    t.string   "org_name"
+    t.string   "from"
+    t.string   "till"
+    t.string   "r_email"
+    t.string   "address"
+    t.string   "r_photo"
+    t.integer  "user_id"
   end
 
   create_table "samajikplaces", force: :cascade do |t|
@@ -152,6 +193,18 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "summary"
+  end
+
+  create_table "searchvadhuvars", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "age"
+    t.string   "color"
+    t.string   "education"
+    t.integer  "weight"
+    t.string   "height"
+    t.string   "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shasandecisions", force: :cascade do |t|
@@ -261,21 +314,21 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.string   "first_name"                              
-    t.string   "middle_name"                             
-    t.string   "last_name"                              
-    t.string   "gender"                                
+    t.string   "first_name",                default: "",   null: false
+    t.string   "middle_name",               default: "",   null: false
+    t.string   "last_name",                 default: "",   null: false
+    t.string   "gender",                    default: " ",  null: false
     t.date     "birthdate"
     t.string   "post"
     t.string   "tenure"
     t.string   "avatar"
-    t.string   "phone"                                  
-    t.string   "address"                                 
+    t.string   "phone",                     default: "",   null: false
+    t.string   "address",                   default: " ",  null: false
     t.string   "user_type"
     t.string   "adhikari_type"
     t.string   "adhikari_type_created",     default: "No"
     t.text     "bio"
-    t.string   "work_at_district"                        
+    t.string   "work_at_district",          default: " ",  null: false
     t.string   "vadhuvar_created",          default: "No"
     t.string   "tanta_mukti_created",       default: "No"
     t.string   "karmachari_bharti_created", default: "No"
@@ -297,7 +350,7 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.string   "expecations"
     t.string   "salary",                           null: false
     t.string   "occupation",                       null: false
-    t.string   "father_name"
+    t.string   "father_name",       default: "",   null: false
     t.string   "mother_name"
     t.string   "uncle_name"
     t.string   "address",                          null: false
@@ -310,6 +363,15 @@ ActiveRecord::Schema.define(version: 20170814185321) do
     t.text     "summary"
     t.string   "vadhuvar_approval", default: "No"
     t.string   "gender",                           null: false
+    t.string   "vadhuvar_sirname",  default: "",   null: false
+    t.string   "color"
+    t.integer  "age"
+    t.string   "exp_color"
+    t.integer  "exp_age"
+    t.string   "exp_height"
+    t.string   "exp_education"
+    t.string   "exp_weight"
+    t.string   "public",            default: "No"
   end
 
   create_table "visions", force: :cascade do |t|

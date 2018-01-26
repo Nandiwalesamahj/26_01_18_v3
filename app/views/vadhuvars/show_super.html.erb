@@ -1,0 +1,103 @@
+<%  if user_signed_in? && current_user.user_type == "Super_admin" %>
+<h2 align="center"><strong>शोधेचा निकाल</strong></h2>
+<hr>
+	<% if @vadhuvar != nil %>
+	<div class="col-xs-8 col-xs-offset-2">
+		<h3 align="center">हे लोक आपल्या शोधाशी जुळतात</h3>
+		<div class="table-responsive">
+			<table class="table2">
+				<thead>
+					<th>फोटो</th>
+					<th>माहिती</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<% if @vadhuvar.photo? %>
+								<%= image_tag((@vadhuvar.photo),class: "karmchari-img image-responsive") %>
+							<% end %>
+						</td>	
+						<td>
+							<p align="left">
+										<b>ID:</b><%= @vadhuvar.id %>
+									</p>
+							<p align="left">
+								<b>नाव:</b>	<%= @vadhuvar.vadhuvar_name %>
+							</p>
+							<%= simple_form_for @vadhuvar do |f| %>
+									<%= f.input :public, collection: [:Yes, :No],label: "सार्वजनिक करा" %>
+									<%= f.submit "Save" %>
+								<% end %>
+
+							<p align="left">
+								<b>लिंग:</b>	<%= @vadhuvar.gender %>
+							</p>					 
+							<p align="left">
+								<b>जन्म तारीख:</b>	<%= @vadhuvar.birth_date %>
+							</p>
+							<p align="left">
+								<b>वय:</b>	<%= @vadhuvar.age %>
+							</p>
+							<p align="left">
+								<b>रंग:</b>	<%= @vadhuvar.color %>
+							</p>
+							<p align="left">
+								<b>उंची:</b><%= @vadhuvar.height %>
+							</p>
+							<p align="left">
+								<b>वजन:</b><%= @vadhuvar.weight %> kg
+							</p>
+							<p align="left">
+								<b>मोबाइल:</b><%= @vadhuvar.phone_number %>
+							</p>
+							<p align="left">
+								<b>शिक्षण:</b><%= @vadhuvar.education %>
+							</p>
+							<p align="left">
+								<b>रक्त गट:</b><%= @vadhuvar.blood_group %>
+							</p>
+							<p align="left">
+								<b>पगार:</b><%= @vadhuvar.salary %> Rs
+							</p>
+							<p align="left">
+								<b>व्यवसाय:</b><%= @vadhuvar.occupation %>
+							</p> 
+							<p align="left">
+								<b>वडिलांचे नाव:</b><%= @vadhuvar.father_name %>
+							</p>
+							<p align="left">
+								<b>आईचे नाव:</b><%= @vadhuvar.mother_name %>
+							</p>
+							<p align="left">
+								<b>मामाचे नाव:</b><%= @vadhuvar.uncle_name %>
+							</p>
+							<p align="left">
+								<b>कूळ:</b><%= @vadhuvar.sub_caste %>
+							</p>
+							<p align="left">
+								<b>पत्ता:</b><%= @vadhuvar.address %>
+							</p>
+							<p align="left">	
+								<b>अपेक्षा:</b><%= @vadhuvar.expecations %> 
+							</p>
+							<p align="left">	
+								<p class="margin-left"><b>अपेक्षा:</b></p>
+								<p class="margin-left"><b>रंग:</b><%= @vadhuvar.exp_color %></p>
+								<p class="margin-left"><b>वय:</b><%= @vadhuvar.exp_age %></p>
+								<p class="margin-left"><b>उंची:</b><%= @vadhuvar.exp_height %></p>
+								<p class="margin-left"><b>शिक्षण:</b><%= @vadhuvar.exp_education %></p>
+								<p class="margin-left"><b>वजन:</b><%= @vadhuvar.exp_weight %></p> 
+							</p>
+							<p align="left"> 
+								<b>स्वतः विषयी:</b><%= @vadhuvar.bio %>
+							</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<% end %>
+<% else %>
+	<p>Access Denied</p>
+<% end %>

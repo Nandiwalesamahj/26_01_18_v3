@@ -1,0 +1,249 @@
+<% if user_signed_in? && (current_user.user_type == "Admin" || current_user.user_type == "Super_admin") %>
+<h2 align="center"><strong>शोधेचा निकाल</strong></h2>
+<hr>
+	<div class="row">
+	<h3 align="center">हे लोक आपल्या शोधाशी जुळतात</h3>
+	<br/>
+		<div class="col-xs-8 col-xs-offset-2">
+	
+		<% if  @vadhuvars != nil &&  @vadhuvars.size > 0 %> 
+			<% if  @vadhuvars != nil &&  @vadhuvars.size > 0 %> 
+				<div class="table-responsive">
+				<table class="table2">
+					<thead>
+						<tr>
+							<th>फोटो</th>
+							<th>माहिती</th>
+						</tr>
+					</thead>
+					<col width="200">
+					<col width="400">
+					<% count = 0 %>
+					<% for member1 in @vadhuvars %>
+						<% if member1.vadhuvar_approval == "Yes" %>
+							<tbody>
+								<tr>
+								<td>
+									<% if member1.photo? %>
+										<%= image_tag((member1.photo),class: "karmchari-img image-responsive") %>
+									<% end %>
+								</td>	
+								<td>
+									<p align="left">
+										<b>ID:</b><%= member1.id %>
+									</p> 
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>नाव:</b>	<%= member1.vadhuvar_name %>
+									</p> 
+									<% end %>
+									<p align="left">
+										<b>लिंग:</b>	<%= member1.gender %>
+									</p> 
+									<p align="left">
+										<b>जन्म तारीख:</b><%= member1.birth_date %>
+									</p>
+									<p align="left">
+										<b>वय:</b>	<%= member1.age %>
+									</p>
+									<p align="left">
+										<b>रंग:</b>	<%= member1.color %>
+									</p>
+									<p align="left">
+										<b>उंची:</b><%= member1.height %>
+									</p>
+									<p align="left">
+										<b>वजन:</b><%= member1.weight %> kg
+									</p>
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>मोबाइल:</b><%= member1.phone_number %>
+									</p>
+									<% end %>
+									<p align="left">
+										<b>शिक्षण:</b><%= member1.education %>
+									</p>
+									<p align="left">
+										<b>रक्त गट:</b><%= member1.blood_group %>
+									</p>
+									<p align="left">
+										<b>पगार:</b><%= member1.salary %> Rs
+									</p>
+									<p align="left">
+										<b>व्यवसाय:</b><%= member1.occupation %>
+									</p> 
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>वडिलांचे नाव:</b><%= member1.father_name %>
+									</p>
+									<p align="left">
+										<b>आईचे नाव:</b><%= member1.mother_name %>
+									</p>
+									<p align="left">
+										<b>मामाचे नाव:</b><%= member1.uncle_name %>
+									</p>
+									<% end %>
+									<p align="left">
+										<b>कूळ:</b><%= member1.sub_caste %>
+									</p>
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>पत्ता:</b><%= member1.address %>
+									</p>
+									<% end %>
+									<p align="left">	
+										<b>अपेक्षा:</b><%= member1.expecations.html_safe %> 
+									</p>
+									<p align="left">	
+								<p><b>अपेक्षा:</b></p>
+								<p class="margin-left"><b>रंग:</b><%= member1.exp_color %></p>
+								<p class="margin-left"><b>वय:</b><%= member1.exp_age %></p>
+								<p class="margin-left"><b>उंची:</b><%= member1.exp_height %></p>
+								<p class="margin-left"><b>शिक्षण:</b><%= member1.exp_education %></p>
+								<p class="margin-left"><b>वजन:</b><%= member1.exp_weight %></p> 
+								</p>
+									<p align="left"> 
+										<b>स्वतः विषयी:</b><%= member1.bio.html_safe %>
+									</p>
+								</td>
+								</tr>
+							</tbody>
+							<% count = count + 1 %>
+						<% end %>
+					<% end %>
+					<% if count == 0 %>
+						<tbody>
+							<tr>
+								<td>N.A.</td>
+								<td>N.A.</td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>					
+				</div>	
+			<% else %>
+				<h3> कोणतेही vadhu वर जोडलेले नाहीत!</h3>
+			<% end %>
+		</div>
+
+
+	<% elsif @vadhuvar_dummy != nil && @vadhuvar_dummy.size > 0 %>
+		<div class="col-xs-6">
+			<% if  @vadhuvar_dummy != nil &&  @vadhuvar_dummy.size > 0 %> 
+				<div class="table-responsive">
+				<table class="table2">
+					<thead>
+						<tr>
+							<th>फोटो</th>
+							<th>माहिती</th>
+						</tr>
+					</thead>
+					<col width="200">
+					<col width="400">
+					<% count = 0 %>
+					<% for member1 in @vadhuvar_dummy %>
+						<% if member1.vadhuvar_approval == "Yes" %>
+							<tbody>
+								<tr>
+								<td>
+									<% if member1.photo? %>
+										<%= image_tag((member1.photo),class: "karmchari-img image-responsive") %>
+									<% end %>
+								</td>	
+								<td>
+									<p align="left">
+										<b>ID:</b><%= member1.id %>
+									</p>
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>नाव:</b>	<%= member1.vadhuvar_name %>
+									</p> 
+									<% end %>
+									<p align="left">
+										<b>लिंग:</b>	<%= member1.gender %>
+									</p> 
+									<p align="left">
+										<b>जन्म तारीख:</b><%= member1.birth_date %>
+									</p>
+									<p align="left">
+										<b>उंची:</b><%= member1.height %>
+									</p>
+									<p align="left">
+										<b>वजन:</b><%= member1.weight %> kg
+									</p>
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>मोबाइल:</b><%= member1.phone_number %>
+									</p>
+									<% end %>
+									<p align="left">
+										<b>शिक्षण:</b><%= member1.education %>
+									</p>
+									<p align="left">
+										<b>रक्त गट:</b><%= member1.blood_group %>
+									</p>
+									<p align="left">
+										<b>पगार:</b><%= member1.salary %> Rs
+									</p>
+									<p align="left">
+										<b>व्यवसाय:</b><%= member1.occupation %>
+									</p> 
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>वडिलांचे नाव:</b><%= member1.father_name %>
+									</p>
+									<p align="left">
+										<b>आईचे नाव:</b><%= member1.mother_name %>
+									</p>
+									<p align="left">
+										<b>मामाचे नाव:</b><%= member1.uncle_name %>
+									</p>
+									<% end %>
+									<p align="left">
+										<b>कूळ:</b><%= member1.sub_caste %>
+									</p>
+									<% if current_user.user_type == "Super_admin" %>
+									<p align="left">
+										<b>पत्ता:</b><%= member1.address %>
+									</p>
+									<% end %>
+									<p align="left">	
+										<b>अपेक्षा:</b><%= member1.expecations.html_safe %> 
+									</p>
+									<p><b>अपेक्षा:</b></p>
+								<p class="margin-left"><b>रंग:</b><%= member1.exp_color %></p>
+								<p class="margin-left"><b>वय:</b><%= member1.exp_age %></p>
+								<p class="margin-left"><b>उंची:</b><%= member1.exp_height %></p>
+								<p class="margin-left"><b>शिक्षण:</b><%= member1.exp_education %></p>
+								<p class="margin-left"><b>वजन:</b><%= member1.exp_weight %></p> 
+								</p>
+									<p align="left"> 
+										<b>स्वतः विषयी:</b><%= member1.bio.html_safe %>
+									</p>
+								</td>
+								</tr>
+							</tbody>
+							<% count = count + 1 %>
+						<% end %>
+					<% end %>
+					<% if count == 0 %>
+						<tbody>
+							<tr>
+								<td>N.A.</td>
+								<td>N.A.</td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>					
+				</div>	
+			<% else %>
+				<h3> कोणतेही vadhu वर जोडलेले नाहीत!</h3>
+			<% end %>
+		</div>
+
+<% end %>
+</div>
+<% else %>
+<p>Access Denied</p>
+<% end %>
+	

@@ -1,27 +1,21 @@
-
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
-<h2 align="center"><strong>राज्‍य संघटना पदाधिकारी</strong></h2>	
-<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
+<%= tinymce %>
+<h2 align="center"><strong>राज्‍य संघटना पदाधिकारी</strong></h2>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :Rajya_sanghatna_summary, label: "राज्‍य संघटना पदाधिकारी सारांश" %>
-		<%= f.submit "Update" %>
-	<% end %>
-<% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :Rajya_sanghatna_summary, label: "राज्‍य संघटना पदाधिकारी सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :Rajya_sanghatna_summary, label: "राज्‍य संघटना पदाधिकारी सारांश" , class: 'tinymce' %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :Rajya_sanghatna_summary, label: "राज्‍य संघटना पदाधिकारी सारांश" , class: 'tinymce' %>
 			<%= f.submit "Save" %>
-	<% end %>
-<% end %>
-	</div>
+			<% end %>
+		<% end %>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 align="center" class="margin-bottom2"><%= simple_format(@summary_exist.Rajya_sanghatna_summary) %></h4>
-	<% end %>
+		<% if @summary_exist != nil %>
+			<h4 class="box-summary"><%= @summary_exist.Rajya_sanghatna_summary.html_safe %></h4>
+		<% end %>
 	<% end %> 
 	<hr>
 	<div class="row">
@@ -68,7 +62,7 @@
 		</table>
 		</div>
 		<% else %>
-			<h3 align="center">राज्य संघटनेचे सदस्य अद्याप निवडले गेले नाहीत, येथे सदस्य जोडण्यासाठी आपल्या प्रशासकाशी संपर्क साधा!</h3>
+			<h3>राज्य संघटनेचे सदस्य अद्याप निवडले गेले नाहीत, येथे सदस्य जोडण्यासाठी आपल्या प्रशासकाशी संपर्क साधा!</h3>
 		<% end %>
 	<%= will_paginate @r_members, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>
 	</div>
@@ -78,13 +72,10 @@
 			<h3>जाहिरात</h3>
 		</div>
 			<div class="panel-body scrollable">
-			<div class="advertisement-box">
-			    
-			</div>
 			<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">
-						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<p class="underline-text"><strong><%= ad.title %></strong></p>
 						<% if ad.photo? %>
 							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
 						<% end %>
@@ -96,5 +87,4 @@
 	</div>	
 	</div>
 	</div>
-	</div>
-</div>
+	

@@ -32,7 +32,7 @@ class SandarbhsuchisController < ApplicationController
     @sandarbhsuchi = Sandarbhsuchi.new(sandarbhsuchi_params)
       if @sandarbhsuchi.save
         redirect_to sandarbhsuchis_path
-    end
+      end
   end
 
   # PATCH/PUT /sandarbhsuchis/1

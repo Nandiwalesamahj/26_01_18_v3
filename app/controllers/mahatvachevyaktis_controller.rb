@@ -36,6 +36,7 @@ class MahatvachevyaktisController < ApplicationController
 		@person = Mahatvachevyakti.new(mahatvachevyakti_params)
 		if user_signed_in?
 			if @person.save
+				AllMailer.mahatvache_vyakti_new(@person).deliver_now
 				redirect_to mahatvachevyakti_home_path
 			end
 		end

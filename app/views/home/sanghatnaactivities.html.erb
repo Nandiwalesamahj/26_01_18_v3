@@ -1,29 +1,25 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
-	<h2 align="center"><strong>संघटनेची कार्ये</strong></h2>		
+<%= tinymce %>
+	<h2 align="center"><strong>संघटनेची कार्ये</strong></h2>
+			
 	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-			<div class="row">
 				<% if @summary_exist != nil %>
-			<%= simple_form_for @summary_exist do |f| %>
-				<%= f.input :Sanghatna_activity_summary, label: "संघटनेची कार्ये सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+				<%= f.text_area :Sanghatna_activity_summary, label: "संघटनेची कार्ये सारांश",class: "tinymce" %>
 				<%= f.submit "Update" %>
 			<% end %>
 		<% else %>
-			<%= simple_form_for @summary do |f| %>
-					<%= f.input :Sanghatna_activity_summary, label: "संघटनेची कार्ये सारांश" %>
+			<%= form_for @summary do |f| %>
+					<%= f.text_area :Sanghatna_activity_summary, label: "संघटनेची कार्ये सारांश",class: "tinymce" %>
 					<%= f.submit "Save" %>
 			<% end %>
 		<% end %>
-			</div>
 			<% else %>
 			<% if @summary_exist != nil %>
-			<h4 class="margin-bottom2"><%= simple_format(@summary_exist.Sanghatna_activity_summary) %></h4>
+			<h4 class="box-summary"><%= simple_format(@summary_exist.Sanghatna_activity_summary) %></h4>
 			<% end %>
 			<% end %>
 		<% if user_signed_in? && current_user.user_type == "Super_admin" %>
-			<%= link_to "नवीन कार्य", new_sanghatnaactivity_path , class: "btn btn-info btn-sm btn-responsive"  %>
+			<%= link_to "नवीन कार्य", new_sanghatnaactivity_path , class: "btn btn-primary btn-sm btn-responsive"  %>
 		<% end %>
 	<hr>	
 	<div class="row">
@@ -46,30 +42,31 @@
 						<% if sanghatnaactivity.photo? %>
 							<%= image_tag((sanghatnaactivity.photo.url),class: "manogat-img image-responsive") %>
 						<% else %>
-									<p align="left" class="margin-left"><b>फोटो उपलब्ध नाही</b></p>
+									<p><b>फोटो उपलब्ध नाही</b></p>
 						<% end %>
 					</td>
 					<td>
-						<p align="left" class="margin-left"><% if sanghatnaactivity.title? %>
-							<b>शीर्षक: </b> <%= sanghatnaactivity.title %>
-						<% end %></p>
-						<p align="left" class="margin-left"><b>तारीख: </b> <% if sanghatnaactivity.event_date? %>
-							<%= sanghatnaactivity.event_date %>
-						<% end %></p>
-						<p align="left" class="margin-left"><b>वर्णन :</b> <% if sanghatnaactivity.description? %>
-						<%= simple_format(sanghatnaactivity.description) %>
-						<% end %></p>
-						<p align="left" class="margin-left">
-						<% if sanghatnaactivity.attachment? %>
-						<%= link_to "#{truncate(File.basename(sanghatnaactivity.attachment.path),length: 25)}","#",target: :_blank %>
+						<% if sanghatnaactivity.title? %>
+							<p><b><%= sanghatnaactivity.title.html_safe %></b></p>
+							
+							
 						<% end %>
-						</p>
-						<p align="left" class="margin-left">
-							<% if user_signed_in? && current_user.user_type == "Super_admin" %>
-							<%= link_to "Edit", edit_sanghatnaactivity_path(sanghatnaactivity) , class: "btn btn-warning btn-xs btn-responsive" %>
-							<%= link_to "Delete", sanghatnaactivity_path(sanghatnaactivity),method: :Delete , class: "btn btn-danger btn-xs btn-responsive" %>
-							<% end %>
-						</p>
+						<% if sanghatnaactivity.event_date? %>
+						<hr>
+							<p><b>तारीख: </b><%= sanghatnaactivity.event_date %></p>
+						<% end %>
+						<% if sanghatnaactivity.description? %>
+							<p><%= simple_format(sanghatnaactivity.description) %></p>
+						<% end %>
+						<% if sanghatnaactivity.attachment? %>
+						<hr>
+							<%= link_to "#{truncate(File.basename(sanghatnaactivity.attachment.path),length: 25)}",:action => 'download_file_sanghatnaactivity', :controller=>"sanghatnaactivities", :id => sanghatnaactivity.id,:target => "_blank" %>
+						<% end %>
+						<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+						<hr>
+							<p><%= link_to "Edit", edit_sanghatnaactivity_path(sanghatnaactivity) , class: "btn btn-primary btn-sm btn-responsive" %>
+							<%= link_to "Delete", sanghatnaactivity_path(sanghatnaactivity),method: :Delete , class: "btn btn-danger btn-sm btn-responsive" %></p>
+						<% end %>
 					</td>
 					</tr>
 				</tbody>
@@ -77,7 +74,7 @@
 			</table>
 			</div>
 		<% else %>
-			<h3 align="center">संघटनेची क्रिया अद्याप जोडलेली नाही, प्रशासकाशी संपर्क साधा!</h3>
+			<h3>संघटनेची क्रिया अद्याप जोडलेली नाही, प्रशासकाशी संपर्क साधा!</h3>
 		<% end %>
 		</div>
 		<div class="col-xs-4">

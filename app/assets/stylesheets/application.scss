@@ -10,9 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
 *= require chosen
+*= require rails_emoji_picker
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'rails_emoji_picker';
 
 pre{
   white-space:pre-wrap;
@@ -21,13 +23,81 @@ pre{
     white-space: -o-pre-wrap; 
     word-break: keep-all;  
     }
+p {
+  margin: 0px;
+}
+
+.box-summary 
+{
+  border: 1px solid #fff;
+  background-color: #fff;
+  padding: 1%;
+  width: 100%;
+}
+.box-vadhuvar-form
+{
+  border: 1px solid #fff;
+  background-color: #fff;
+  padding: 1%;
+  
+}
+.box-shadow1
+{
+  border: 1px solid #fff;
+  padding: 1%;
+  background-color: #fff;
+}
+.box-shadow1:hover
+{
+  border: 1px solid #fff;
+  background-color: #fff;
+  padding: 1%;
+  box-shadow: 5px 5px 5px 5px #888888;
+}
+
+.box-shadow2
+{
+  border: 1px solid grey;
+  background-color: grey;
+  padding: 1%;
+}
+.box-shadow2:hover
+{
+  border: 1px solid grey;
+  background-color: grey;
+  padding: 1%;
+  box-shadow: 5px 5px 5px 5px red;
+}
+
+/* mahatvache links */
+.links-box
+{
+  border: 1px solid #232b2b;
+  background-color: #232b2b;
+  padding: 15px;
+  width: 100%;
+}
 
 
+.link-options a{
+  background: none;
+  color: #dc3d24;
+  font-size: 17px;
+  text-decoration: none;
+}
+.link-options a:hover{
+  background: none;
+  color: #e3ae57;
+  text-decoration: underline;
+  text-shadow: 10%;
+}
+
+/* mahatvache links--end */
 
 .margin-main-div
 {
-	margin-left: 2%;
-	margin-right: 2%;
+	margin-left: 0%;
+	margin-right: 0%;
   padding: 0%;
 }
 
@@ -92,17 +162,6 @@ pre{
 		transition: 0.3s;
 		background-color: #3b5998;
 		text-decoration: none;
-}
-
-.link-options a{
-	background: none;
-	color: red;
-	text-decoration: none;
-}
-.link-options a:hover{
-	background: none;
-	color: black;
-	text-decoration: underline;
 }
 
 .underline-text {
@@ -171,6 +230,15 @@ pre{
 	height: 100%;
 	border: 1px solid black;
 	border-radius: none;
+}
+
+.img3{
+  padding: 0px;
+  margin-left: 0px;
+  width: 100%;
+  height: 250px;
+  border: 1px solid black;
+  border-radius: none;
 }
 
 @media (min-width: 501px) and (max-width: 768px){
@@ -242,26 +310,47 @@ pre{
 
 
 .bg {
-    background-image: url("bodybg.jpg");
+    background-image: url("orange.png");
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.bg2 {
+    background-image: url("orange2.png");
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.bg3 {
+    background-image: url("orange3.png");
     height: 100%;
     background-position: center;
     background-size: cover;
 }
 
+.body{
+  padding-top: 50px;
+}
+
 .scrollable {
-    height: 400px; 
+    height: 500px; 
     margin: 0px;
     overflow-y: auto;
 }
 
 hr {
-  border-color: #c1c1c1;
-
+  border-color: #e3ae57;
 }
+
+hr2{
+  border-color: #dc3d24;
+}
+
+/* navbar */
 
 @media (max-width: 1020px) {
   .navbar-header {
-      float: none;
+      float: center;
   }
   .navbar-left,.navbar-right {
       float: none !important;
@@ -304,55 +393,31 @@ hr {
     font-weight: bold;
   }
 }
+
 .nav.sidebar.navbar.sidebar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin-left: 0px;
     font-weight: bold;
 }
 .navbar-default .navbar-nav > li > a {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
   }
-
-
-/* table */
-
-/* tables */
-table.table1 {
-          border-collapse: collapse;
-}
-table.table1 th {
-    background-color: grey;
-    color: white;
-}
-table.table1 th,table.table1 td {
-    text-align: center;
-    padding: 4px;
-}
-table.table1 ,table.table1 td,table.table1 th {
-    border: 2px solid black;
+.navbar-default .navbar-header {
+  margin-left: 2%;
+  float: center;
+  text-align: center;
+  horizontal-align: center;
+  verticle-align: center;
 }
 
-table.table2 {
-          border-collapse: collapse;
-}
-table.table2 th {
-    background-color: #8b9dc3;
-    color: white;
-}
-table.table2 td {
-    background-color: #fff;
-    color: black;
-}
-table.table2 th,table.table2 td {
-    text-align: center;
-    padding: 6px;
-}
-table.table2 ,table.table2 td,table.table2 th {
-    border: 1px solid black;
+.navbar-default .navbar-brand {
+    color: #dc3d24;
 }
 
-table.table2 tr:hover{background-color: #ffc9b3}
-table.table2 tr:hover{color: #000000}
+.navbar-default .navbar-brand:hover {
+    color: #e3ae57;
+}
+
 
 
 /* sidebar */
@@ -424,18 +489,25 @@ body,html{
       padding: 0 0px 0 0px;
     }
 
-    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-      color: white;
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+      color: black;
+      background-color: #fff; 
+    }
+
+     .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+      color: #fff;
+      background-color: #dc3d24; 
     }
 
     nav.sidebar{
+    position: fixed;
       width: 200px;
       height: 100%;
       margin-left: -160px;
       float: left;
       margin-bottom: 0px;
-      color: white;
-      background-color: #3b5998;
+      color: black;
+      background-color: #fff;
     }
 
     nav.sidebar li {
@@ -462,7 +534,7 @@ body,html{
     nav.sidebar{
       margin-left: 0px;
       float: left;
-      background-color: #3b5998;
+      background-color: #fff;
     }
 
     nav.sidebar .forAnimate{
@@ -471,18 +543,19 @@ body,html{
   }
 
 
-  .navbar-inverse .navbar-nav > li > a {
-    color: #fff;
+  .navbar-default .navbar-nav > li > a {
+    color: black;
     text-align: center;
+    font-size: 15px;
   }
 
-  .navbar-inverse .navbar-nav > li > a:hover {
-    color: #ccc;
-    text-decoration: underline;
+  .navbar-default .navbar-nav > li > a:hover {
+    color: #fff;
+    background-color: #dc3d24;
   }
 
   nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
-    color: white;
+    color: black;
     background-color: transparent;
   }
 
@@ -492,6 +565,73 @@ body,html{
   section{
     padding-left: 15px;
   }
+
+/* sidebar end */
+
+
+/* tables */
+table.table1 {
+          border-collapse: collapse;
+}
+table.table1 th {
+    background-color: #dc3d24;
+    color: #232b2b;
+    text-align: center;
+    padding: 6px;
+}
+table.table1 td {
+    background-color: #232b2b;
+    color: #e3ae57;
+    text-align: left;
+    padding: 6px;
+}
+table.table1 ,table.table1 td,table.table1 th {
+    border: 1px solid black;
+}
+
+
+table.table2 {
+          border-collapse: collapse;
+          border-radius: 5px;
+}
+table.table2 th {
+    background-color: #232b2d;
+    color: #e3ae57;
+    text-align: center;
+    padding: 6px;
+}
+table.table2 td {
+    background-color: #ffe4ba;
+    color: #232b2d;
+    text-align: left;
+    padding: 6px;
+}
+
+table.table2 ,table.table2 td,table.table2 th {
+    border: 1px solid black;
+}
+
+
+table.table3 {
+          border-collapse: collapse;
+          border-radius: 5px;
+}
+table.table3 th {
+    background-color: #232b2d;
+    color: #e3ae57;
+    text-align: center;
+    padding: 6px;
+}
+table.table3 td {
+    background-color: #ffe4ba;
+    color: #232b2d;
+    text-align: left;
+    padding: 6px;
+}
+
+table.table3 ,table.table3 td,table.table3 th {
+    border: 1px solid black;
+}
 
 .advertisement-box {
   padding-left: 2%;
@@ -504,7 +644,7 @@ body,html{
 /* Footer */
 
 .footer-nandi{
-  background-color: #3b5998;
+  background-color: #232b2b;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   text-align: left;
@@ -521,8 +661,7 @@ body,html{
 }
 .footer-nandi a:hover{
   background: none;
-  color: #ccc;
-  text-decoration: underline;
+  color: #dc3d24;
 }
 
 
@@ -531,7 +670,7 @@ body,html{
 
 
 .footer-nandi .footer-center i{
-  background-color:  #33383b;
+  background-color: rgb(46,46,46);
   color: #ffffff;
   font-size: 25px;
   width: 38px;
@@ -588,8 +727,6 @@ body,html{
   }
 
 }
-
-
 .margin-footer-center{
   margin-top: 4%;
 }

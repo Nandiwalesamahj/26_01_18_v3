@@ -1,75 +1,86 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
+<%= tinymce %>
 <h2 align="center"><strong>प्रतिक्रीया</strong></h2>
-				<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-			<div class="row">
-				<% if @summary_exist != nil %>
-			<%= simple_form_for @summary_exist do |f| %>
-				<%= f.input :pratikriya_summary, label: "प्रतिक्रीया सारांश" %>
-				<%= f.submit "Update" %>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+		<% if @summary_exist != nil %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :pratikriya_summary, label: "प्रतिक्रीया सारांश" ,class: 'tinymce' %>
+			<%= f.submit "Update" %>
 			<% end %>
 		<% else %>
-			<%= simple_form_for @summary do |f| %>
-					<%= f.input :pratikriya_summary, label: "प्रतिक्रीया सारांश" %>
-					<%= f.submit "Save" %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :pratikriya_summary, label: "प्रतिक्रीया सारांश" , class: 'tinymce' %>
+			<%= f.submit "Save" %>
 			<% end %>
 		<% end %>
-			</div>
-			<% else %>
-			<% if @summary_exist != nil %>
-			<h4 class="margin-bottom2">(<%= simple_format(@summary_exist.pratikriya_summary) %>)</h4>
-			<% end %>
-			<% end %>
-		<hr>
-		<div class="row">
-			<div class="col-xs-8">
-<% if user_signed_in? %>
-					<div class="panel panel-default">
-					<div class="panel-body">
-						<p>तुमची प्रतिक्रीया लिहा </p>
-					</div>
-					<div class="panel-footer">
-						<%= render 'form' %></div>
-					</div>
-				<% end %>
+	<% else %>
+		<% if @summary_exist != nil %>
+			<h4 class="box-summary"><%= @summary_exist.pratikriya_summary.html_safe%></h4>
+		<% end %>
+	<% end %>
+	<hr>
+	<div class="row">
+	<div class="col-xs-8">
+	<h3>प्रतिक्रिया शोध </h3>        
+        <p><%= form_tag show_feedback_path, method: :get do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Enter", autofocus: true,
+              class: 'form-control search-box input-sm' %>
 
-				<% if @feedbacks != nil && @feedbacks.size > 0%>
+          <%= submit_tag "Search", class: 'btn btn-sm btn-success' %>
+        <% end %></p>
+        <br/>
+    	<%= link_to "शीर्षकानुसार प्रतिक्रिया यादी",feedback_titles_path, class: "btn btn-sm btn-primary btn-responsive" %>
+    	<hr>	
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-xs-8">
+			<% if user_signed_in? %>
+				<div class="panel panel-default">
+				<div class="panel-body">
+					<h3><strong>तुमची प्रतिक्रीया लिहा </strong></h3>
+				</div>
+				<div class="panel-footer">
+					<%= render 'form' %></div>
+				</div>
+			<% end %>
+			<hr>
+			<% if @feedbacks != nil && @feedbacks.size > 0%>
 					<% for feedback in @feedbacks %>
 						<div class="panel panel-warning">
 							<div class="panel-heading">
-								<h5><%= feedback.title %></h5>
+								<h4><strong><%= feedback.title.html_safe %></strong></h4>
 							</div>
 							<div class="panel-body">
 								<p><%= simple_format(feedback.description) %></p>
-								<p><b>Posted by :</b><%= feedback.user_name %></p>
 							</div>
+							<div class="panel-footer">
+								<p>ID :<b><%= feedback.id %></b></p>
+								<p>Posted by :<b><%= feedback.user_name %></b></p>
+								<p>Posted on :<b><%= feedback.created_at.strftime("%d/%m/%Y | %l:%M %P") %></b></p>
 							<% if user_signed_in? && feedback.user_id == current_user.id %>
-								<div class="panel-footer">
-									<%= link_to "delete", feedback_path(feedback),method: :delete,class: "btn btn-danger btn-sm btn-responsive" %>
-								</div>
+								
+									<%= link_to "Delete", feedback_path(feedback),method: :delete,class: "btn btn-danger btn-sm btn-responsive" %>
+								
 							<% end %>
+							</div>
 						</div>
 					<% end %>
 				<% else %>
 					<h3>प्रतिक्रीया लिहा!</h3>
 				<% end %>
-	 <%= will_paginate @feedbacks, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>
-			
+					 <%= will_paginate @feedbacks, :renderer =>  BootstrapPagination::Rails %>
 			</div>
+
 			<div class="col-xs-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3>जाहिरात</h3>
 				</div>
 					<div class="panel-body scrollable">
-					 <div class="advertisement-box">
-					 </div>
 			<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">
-						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<p class="underline-text"><strong><%= ad.title %></strong></p>
 						<% if ad.photo? %>
 							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
 						<% end %>
@@ -81,5 +92,3 @@
 			</div>	
 			</div>
 		</div>
-	</div>
-</div>

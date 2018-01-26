@@ -1,106 +1,102 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-   <div class="col-xs-10">
+<%= tinymce %>
 <h2 align="center"><strong>संदर्भ सूची</strong></h2>
-   <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-    <div class="row">
+    <% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
         <% if @summary_exist != nil %>
-    <%= simple_form_for @summary_exist do |f| %>
-        <%= f.input :sandarbhsuchi_summary, label: "संदर्भ सूची सारांश" %>
-        <%= f.submit "Update" %>
-    <% end %>
-<% else %>
-    <%= simple_form_for @summary do |f| %>
-            <%= f.input :sandarbhsuchi_summary, label: "संदर्भ सूची सारांश" %>
+            <%= form_for @summary_exist do |f| %>
+            <%= f.text_area :sandarbhsuchi_summary, label: "संदर्भ सूची सारांश", class: "tinymce" %>
+            <%= f.submit "Update" %>
+            <% end %>
+        <% else %>
+            <%= form_for @summary do |f| %>
+            <%= f.text_area :sandarbhsuchi_summary, label: "संदर्भ सूची सारांश", class: "tinymce" %>
             <%= f.submit "Save" %>
-    <% end %>
-<% end %>
-    </div>
+            <% end %>
+        <% end %>
     <% else %>
-    <% if @summary_exist != nil %>
-    <h4 align="center" class="margin-bottom2"><%= simple_format(@summary_exist.sandarbhsuchi_summary) %></h4>
+        <% if @summary_exist != nil %>
+            <h4 class="box-summary"><%= @summary_exist.sandarbhsuchi_summary.html_safe %></h4>
+        <% end %>
     <% end %>
+    <% if user_signed_in?   && current_user.user_type == "Super_admin" %>
+        <%= link_to 'New Sandarbhsuchi', new_sandarbhsuchi_path, class: "btn btn-primary btn-sm btn-responsive" %>
     <% end %>
-        <% if user_signed_in? && current_user.user_type == "Super_admin" %>
-            <%= link_to 'New Sandarbhsuchi', new_sandarbhsuchi_path, class: "btn btn-info btn-sm btn-responsive" %>
-         <% end %>
-        <hr>
-        <div class="row">
-            <div class="col-xs-8">
-            <% if @sandarbhsuchis.size > 0 %>
-                <div class="table-responsive">
-                <table class="table2">
-                    <col width="50">
-                    <col width="700">
-                    <thead>
-                        <tr>
-                            <th>नंबर</th>
-                            <th> माहिती</th>
-                        </tr>
-                    </thead>
-                    <% count = 1 %>
-                    <% @sandarbhsuchis.each do |sandarbhsuchi| %>
-                    <tbody>
-                        <tr>
-                        <td>
-                            <p><b><%= count %></b></p>
-                        </td>    
-                        <td>
-                            <p align="left" class="margin-left"><b><%= sandarbhsuchi.title %></b></p>
-                            <p align="left" class="margin-left"><%= simple_format(sandarbhsuchi.description) %></p>
-                            <p align="left" class="margin-left">
-                                <%if sandarbhsuchi.link? %>
-                                    <a href=<%= sandarbhsuchi.link %>> link </a>
-                                <% end %> 
-                            </p>
-                            <p align="left" class="margin-left">
-                               <% if sandarbhsuchi.attachment? %>
-                                  <%= link_to "#{truncate(File.basename(sandarbhsuchi.attachment.path),length:25)}",:action => 'download_file_sandarbhsuchi', :controller=>"sandarbhsuchis", :id => sandarbhsuchi.id %>
-                                <% end %>
-                            </p>
-                            <p align="left" class="margin-left">
-                                <% if user_signed_in? && current_user.user_type == "Super_admin" %>
-                                    <%= link_to 'Edit', edit_sandarbhsuchi_path(sandarbhsuchi), class: "btn btn-warning btn-xs btn-responsive" %>
-                                    <%= link_to 'Delete', sandarbhsuchi_path(sandarbhsuchi),method: :delete, class: "btn btn-danger btn-xs btn-responsive" %>
-                                <% end %>
-                            </p>
-                        </td>
-                        </tr>
-                    </tbody>
-                    <% count = count + 1 %>
-                    <% end %>
-                </table>
-	<%= will_paginate @sandarbhsuchis, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>
-                                       
-                </div>
-            <% else %>
-                <h3 align="center">संदर्भ सूची </h3>
-            <% end %>
-          </div>
-          <div class="col-xs-4">
-              <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3>जाहिरात</h3>
-              </div>
-                <div class="panel-body scrollable">
-		<div class="advertisement-box">
-		  
-		</div>
-            <% if @ads.size > 0 %>
-                <% for ad in @ads %>
-                    <div class="advertisement-box">
-                        <p class="underline-text"><strong><%= ad.title %></strong><p>
-                        <% if ad.photo? %>
-                            <p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+    <hr>
+<div class="row">
+    <div class="col-xs-8">
+    <% if @sandarbhsuchis.size > 0 %>
+        <div class="table-responsive">
+        <table class="table2">
+            <col width="50">
+            <col width="700">
+            <thead>
+                <tr>
+                    <th>नंबर</th>
+                    <th> माहिती</th>
+                </tr>
+            </thead>
+            <% count = 1 %>
+            <% @sandarbhsuchis.each do |sandarbhsuchi| %>
+            <tbody>
+                <tr>
+                <td>
+                    <p><b><%= count %></b></p>
+                </td>    
+                <td>
+                    <p><b><%= sandarbhsuchi.title.html_safe %></b></p>
+                    <br/>
+                    <p><%= sandarbhsuchi.description.html_safe %></p>
+                    
+                    <p>
+                        <%if sandarbhsuchi.link? %>
+                        <hr>
+                            <a href=<%= "#{sandarbhsuchi.link.html_safe}" %>> link </a>
+                            <br/>
+                        <% end %> 
+                    </p>
+                    <p>
+                       <% if sandarbhsuchi.attachment? %>
+                          <%= link_to "#{truncate(File.basename(sandarbhsuchi.attachment.path),length:25)}",:action => 'download_file_sandarbhsuchi', :controller=>"sandarbhsuchis", :id => sandarbhsuchi.id %>
+                          
                         <% end %>
-                        <p><%= ad.description %></p>
-                    </div>
-                <% end %>
+                    </p>
+                    <p>
+                        <% if user_signed_in? && current_user.user_type == "Super_admin" %>
+                        <hr>
+                            <%= link_to 'Edit', edit_sandarbhsuchi_path(sandarbhsuchi), class: "btn btn-primary btn-sm btn-responsive" %>
+                            <%= link_to 'Delete', sandarbhsuchi_path(sandarbhsuchi),method: :delete, class: "btn btn-danger btn-sm btn-responsive" %>
+                        <% end %>
+                    </p>
+                </td>
+                </tr>
+            </tbody>
+            <% count = count + 1 %>
             <% end %>
+        </table>
+           <%= will_paginate @sandarbhsuchis, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>
+                               
         </div>
-              </div>  
-          </div>
-        </div>
+    <% else %>
+        <h3>संदर्भ सूची </h3>
+    <% end %>
     </div>
+  <div class="col-xs-4">
+      <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>जाहिरात</h3>
+      </div>
+        <div class="panel-body scrollable">
+    <% if @ads.size > 0 %>
+        <% for ad in @ads %>
+            <div class="advertisement-box">
+                <p class="underline-text"><strong><%= ad.title %></strong><p>
+                <% if ad.photo? %>
+                    <p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+                <% end %>
+                <p><%= ad.description %></p>
+            </div>
+        <% end %>
+    <% end %>
+</div>
+      </div>  
+  </div>
 </div>

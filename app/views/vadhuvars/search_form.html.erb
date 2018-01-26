@@ -1,0 +1,61 @@
+<h2 align="center"><strong>Search</strong></h2>
+<hr>
+<div class="row">
+    <div class="col-xs-offset-2 col-xs-8">
+        
+    <% if user_signed_in? && current_user.user_type == "Super_admin" %> 
+        <%= form_tag show_super_path, method: :get do %>
+          <%= text_field_tag :passed_id, params[:passed_id], placeholder: "Enter ID", autofocus: true,
+              class: 'form-control search-box input-sm' %>
+          <%= submit_tag "Search Vadhuvar", class: 'btn btn-sm btn-success' %>
+        <% end %>
+    <% end %>
+    <% if user_signed_in? && (current_user.user_type == "Super_admin" || current_user.user_type == "Admin" ) %>
+        <div class="box-vadhuvar-form">
+            <% if @flag == 0 %>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <col width="200">
+                    <col width="500">
+                    <%= simple_form_for @search_vadhuvar do |f| %>
+                    <tbody>
+                        <%= f.error_notification %>
+                        <tr><td>लिंग</td><td><%= f.input :gender,collection: [:स्त्री,:पुरूष] , label: false %></td></tr>
+                        <tr><td>वय</td><td><%= f.input :age, placeholder: "वैध वय प्रविष्ट करा" , label: false %></td></tr>
+                        <tr><td>रंग</td><td><%= f.input :color,collection:[:गोरा,:निमगोरा,:सावळा],placeholder: "वैध रंग प्रविष्ट करा"  , label: false %></td></tr>
+                        <tr><td>शिक्षण</td><td><%= f.input :education,collection: [:दहावीखालील,:दहावीपास,:बारावीपास,:डिप्लोमा,:ग्रॅज्युएट,:पोस्टग्रॅज्युएट ,:पीएचडी ] , label: false %></td></tr>
+                        <tr><td>वजन</td><td><%= f.input :weight, placeholder: "वैध वजन प्रविष्ट करा" , label: false %></td></tr>
+                        <tr><td>उंची(cm मध्ये )</td><td><%= f.input :height, placeholder: "सीएमएस मध्ये वैध उंची प्रविष्ट करा" , label: false %> </td></tr>
+                        <tr><td><%= f.submit "Save",class: "btn btn-sm btn-default btn-responsive"%></td><td></td></tr>
+                    </tbody>
+                    <% end %>
+                </table>
+            </div>
+            <% elsif @flag == 1 %>
+             <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <col width="200">
+                    <col width="500">
+                    <%= simple_form_for @search_vadhuvar_update do |f| %>
+                    <tbody>
+                        <%= f.error_notification %>
+                        <tr><td><b>लिंग</b></td><td><%= f.input :gender,collection: [:स्त्री,:पुरूष] , label: false %></td></tr>
+                        <tr><td><b>वय</b></td><td><%= f.input :age, placeholder: "वैध वय प्रविष्ट करा" , label: false %></td></tr>
+                        <tr><td><b>रंग</b></td><td><%= f.input :color,collection:[:गोरा,:निमगोरा,:सावळा],placeholder: "वैध रंग प्रविष्ट करा"  , label: false %></td></tr>
+                        <tr><td><b>शिक्षण</b></td><td><%= f.input :education,collection: [:दहावीखालील,:दहावीपास,:बारावीपास,:डिप्लोमा,:ग्रॅज्युएट,:पोस्टग्रॅज्युएट ,:पीएचडी ] , label: false %></td></tr>
+                        <tr><td><b>वजन</b></td><td><%= f.input :weight, placeholder: "वैध वजन प्रविष्ट करा" , label: false %></td></tr>
+                        <tr><td><b>उंची(cm मध्ये )</b></td><td><%= f.input :height, placeholder: "सीएमएस मध्ये वैध उंची प्रविष्ट करा" , label: false %> </td></tr>
+                        <tr><td><%= f.submit "Save",class: "btn btn-sm btn-default btn-responsive"%></td><td></td></tr>
+                    </tbody>
+                    <% end %>
+                </table>
+            </div>
+                <%= link_to "Search Vadhuvar", search_result_path(passed_search: @search_vadhuvar_update), class: "btn btn-sm btn-primary btn-responsive" %>
+            <% end %>
+        </div>
+        <% else %>
+        Access Denied
+        <% end %>
+    </div>
+</div>
+

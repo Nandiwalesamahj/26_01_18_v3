@@ -1,33 +1,30 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
+<%= tinymce %>
 	<h2 align="center"><strong>शासकिय योजना</strong></h2>
 	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :shaskiyayojana_summary, label: "शासकिय योजना सारांश" %>
-		<%= f.submit "Update" %>
-	<% end %>
-<% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :shaskiyayojana_summary, label: "शासकिय योजना सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :shaskiyayojana_summary, label: "शासकिय योजना सारांश",class: "tinymce" %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :shaskiyayojana_summary, label: "शासकिय योजना सारांश",class: "tinymce" %>
 			<%= f.submit "Save" %>
-	<% end %>
-<% end %>
-	</div>
+			<% end %>
+		<% end %>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 align="center" class="margin-bottom2">(<%= simple_format(@summary_exist.shaskiyayojana_summary) %>)</h4>
+		<% if @summary_exist != nil %>
+			<h4 class="margin-bottom2"><%= @summary_exist.shaskiyayojana_summary.html_safe %></h4>
+		<% end %>
 	<% end %>
-	<% end %>
+
 	<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-		<%= link_to "नवीन शास्किया योजना",new_shaskiyayojana_path, class: "btn btn-info btn-sm" %>
+		<%= link_to "नवीन शासकिय योजना",new_shaskiyayojana_path, class: "btn btn-primary btn-sm" %>
 	<% end %>
 	<hr>
+
 	<div class="row">
-	<div class="col-xs-8">
+		<div class="col-xs-8">
 		<% if @shaskiyayojanas != nil && @shaskiyayojanas.size > 0 %>
 			<div class="table-responsive">
 			<table class="table2">
@@ -43,18 +40,21 @@
 					<% for shaskiyayojana in @shaskiyayojanas %>
 						<tbody>
 							<tr>
-							<td align="center"><%= count %></td>
+							<td align="center"><strong><%= count %></strong></td>
 							<td>
-								<p align="left" class="margin-left"><b><%= shaskiyayojana.title %></b></p>
-								<p align="left" class="margin-left"><%= simple_format(shaskiyayojana.description) %></p>
-								<p align="left" class="margin-left">
+								<p><b><%= shaskiyayojana.title.html_safe %></b></p>
+								<hr>
+								<p><%= shaskiyayojana.description.html_safe %></p>
+								<hr>
+								<p>
 									<% if shaskiyayojana.attachment? %>
 										<%= link_to "#{truncate(File.basename(shaskiyayojana.attachment.path),length: 25)}", :action => 'download_file_shaskiyayojana', :controller=>"shaskiyayojanas", :id => shaskiyayojana.id,:target => "_blank" %>
+										<hr>
 									<% end %>
 								</p>
-								<p align="left" class="margin-left"><% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-									<%= link_to "edit",edit_shaskiyayojana_path(shaskiyayojana), class: "btn btn-warning btn-sm" %> 
-									<%= link_to "delete",shaskiyayojana_path(shaskiyayojana),method: :delete, class: "btn btn-danger btn-sm" %>
+								<p><% if user_signed_in? && (current_user.user_type == "Super_admin") %>
+									<%= link_to "Edit",edit_shaskiyayojana_path(shaskiyayojana), class: "btn btn-primary btn-sm btn-responsive" %> 
+									<%= link_to "Delete",shaskiyayojana_path(shaskiyayojana),method: :delete, class: "btn btn-danger btn-sm btn-responsive" %>
 									<% end %>
 								</p>
 							</td>
@@ -65,7 +65,7 @@
 			</table>
 			</div>
 		<% else %>
-			<p><h3> माहिती उपलब्ध नाही <h3></p>
+			<p><h3> माहिती उपलब्ध नाही </h3></p>
 		<% end %>
 	</div>
 	<div class="col-xs-4">
@@ -74,13 +74,10 @@
 				<h3>जाहिरात</h3>
 			</div>
 				<div class="panel-body scrollable">
-			 <div class="advertisement-box">
-			 
-			</div>
-			<% if @ads.size > 0 %>
+				<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">
-						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<p class="underline-text"><strong><%= ad.title %></strong></p>
 						<% if ad.photo? %>
 							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
 						<% end %>
@@ -91,6 +88,4 @@
 		</div>
 		</div>	
 	</div>
-	</div>	
 	</div>
-</div>

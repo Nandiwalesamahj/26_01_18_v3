@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
+  get 'galleries/new'
+
+  get 'galleries/edit'
+
+  get 'galleries/destroy'
+
+  get 'galleries/index'
+
+  get 'galleries/create'
+
   resources :advertises
   resources :sandarbhsuchis
   devise_for :users
+  resources :galleries
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
   resources :home
@@ -23,7 +34,10 @@ Rails.application.routes.draw do
   resources :visions
   resources :shaskiyayojanas
   resources :summaries
-
+  resources :searchvadhuvars
+  resources :excelattaches
+get 'search_form',to: "vadhuvars#search_form"
+get 'search_result',to: "vadhuvars#search_result"
 get 'admin_edit', to: "users#admin_edit"
 get 'shaskiya_karmachari', to: "mahatvachevyaktis#shaskiya_karmachari"
 get 'pratishtit_manadal',to: "mahatvachevyaktis#pratishtit_manadal"
@@ -34,7 +48,10 @@ get 'vyapari',to: "mahatvachevyaktis#vyapari"
 get 'sevadatey',to: "mahatvachevyaktis#sevadatey"
 get 'samaj_bandhav',to: "mahatvachevyaktis#samaj_bandhav"
 
-
+get 'show_super',to: "vadhuvars#show_super"
+get 'show_feedback',to: "feedbacks#show_feedback"
+get 'feedback_titles',to: "feedbacks#feedback_titles"
+get 'download_file_excel', to: "excelattaches#download_file_excel"
 
 get 'download_file_sandarbhsuchi', to: "sandarbhsuchis#download_file_sandarbhsuchi"
 get'zilla_approval', to: "users#zilla_approval"

@@ -1,5 +1,8 @@
-<%= simple_form_for @feedback do |f| %>
-	<%= f.input :title %>
-	<%= f.input :description %>
-	<%= f.submit "सबमिट" %>
+<%= form_for @feedback do |f| %>
+	<h3>शीर्षक</h3>
+	<%= f.text_field :title,size: "60" %>
+	<h3>वर्णन</h3>
+	<%= f.text_area :description,class: "tinymce" %>
+	<%= f.submit "सबमिट",class: "btn btn-default" %>
 <% end %>
+

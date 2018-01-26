@@ -1,15 +1,13 @@
-<%= simple_form_for(@sandarbhsuchi) do |f| %>
-  <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :title,required: true %>
-    <%= f.input :description,required: true %>
-    <%= f.input :link %>
-    <p>Attachment</p>
-    <%= f.file_field :attachment %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Done" %>
-  </div>
+<%= form_for @sandarbhsuchi do |f| %>
+    <h3>Title</h3>
+      <%= f.text_area :title ,  class: 'tinymce'%>
+    <h3>Description</h3>
+      <%= f.text_area :description ,  class: 'tinymce'%>
+    <h3>Link</h3>
+      <%= f.text_field :link,size: 100 %>
+      <p>Attachment</p>
+      <%= f.file_field :attachment %>
+      <%= f.submit %>
 <% end %>
+<%= tinymce %>

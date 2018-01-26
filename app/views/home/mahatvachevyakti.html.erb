@@ -1,41 +1,59 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
+<%= tinymce %>
 <h2 align="center"><strong>समाजातील महत्‍वाच्‍या व्‍यक्‍ती</strong></h2>
-<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :important_people_summary, label: "समाजातील महत्‍वाच्‍या व्‍यक्‍ती सारांश" %>
-		<%= f.submit "Update" %>
-	<% end %>
-<% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :important_people_summary, label: "समाजातील महत्‍वाच्‍या व्‍यक्‍ती सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :important_people_summary, label: "समाजातील महत्‍वाच्‍या व्‍यक्‍ती सारांश",class: "tinymce" %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :important_people_summary, label: "समाजातील महत्‍वाच्‍या व्‍यक्‍ती सारांश",class: "tinymce" %>
 			<%= f.submit "Save" %>
-	<% end %>
-<% end %>
-	</div>
+			<% end %>
+		<% end %>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 align="center" class="margin-bottom2"><%= simple_form(@summary_exist.important_people_summary) %></h4>
-	<% end %>
+		<% if @summary_exist != nil %>
+			<h4 class="box-summary"><%= @summary_exist.important_people_summary.html_safe %></h4>
+			<% end %>
 	<% end %>
 
 	<% if user_signed_in? %>
-		<%= link_to "महत्वाचे व्यक्ती ऍड करा ", new_mahatvachevyakti_path ,class: "btn btn-info btn-sm btn-responsive" %>
-	<% end %> 
+		<%= link_to "महत्वाचे व्यक्ती ऍड करा ", new_mahatvachevyakti_path ,class: "btn btn-primary btn-sm btn-responsive" %>
+	<% end %>
 	<hr>
-	<%= link_to "प्रतिष्ठीत मंडळाचे सदस्य",pratishtit_manadal_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "पुरस्कार प्राप्त",puraskar_prapt_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "समाजातील पंच",samajatil_panch_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "उद्योजक ",uddyojak_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "व्यापारी",vyapari_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "सेवादाते",sevadatey_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "समाज बांधव",samaj_bandhav_path , class: "btn btn-md btn-warning btn-responsive" %>
-	<%= link_to "शासकीय कर्मचारी", shaskiya_karmachari_path, class: "btn btn-md btn-warning btn-responsive" %>
-		<% if  @importantpeople!= nil &&  @importantpeople.size > 0 %>
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+			<%= simple_form_for @sheet do |f| %>
+				<h3>एक्सेल शीट जोडा</h3>
+				<%= f.file_field :excel,label: "एक्सेल शीट जोडा " %>
+				<%= f.submit "Save" %>
+			<% end %>
+			<hr>
+	<% end %>
+	
+		<% if @flag != 0 %>
+			<% if @sheet.excel? %>
+				<h3>समाजबांधवांची यादी (एक्सेल शीट)</h3>
+				<%= link_to "#{truncate(File.basename(@sheet.excel.path),length: 25)}",:action => 'download_file_excel', :controller=>"excelattaches", :id => @sheet.id,:target => "_blank" %>
+			<% end %>
+			<hr>
+		<% end %>
+
+	<div class="row">
+
+		<div class="col-xs-12">
+			<div class="links-box">
+			<p class="link-options"><b><%= link_to "प्रतिष्ठीत मंडळाचे सदस्य",pratishtit_manadal_path %> &emsp;
+			<%= link_to "पुरस्कार प्राप्त",puraskar_prapt_path %> &emsp;
+			<%= link_to "समाजातील पंच",samajatil_panch_path %> &emsp;
+			<%= link_to "उद्योजक ",uddyojak_path %> &emsp;
+			<%= link_to "व्यापारी",vyapari_path %> &emsp;
+			<%= link_to "सेवादाते",sevadatey_path %> &emsp;
+			<%= link_to "समाज बांधव",samaj_bandhav_path %> &emsp;
+			<%= link_to "शासकीय कर्मचारी", shaskiya_karmachari_path%></b> </p>
+			</div>
+			<br/>
+			<% if  @importantpeople!= nil &&  @importantpeople.size > 0 %>
 			<div class="table-responsive">
 	    	<table class="table2">
 
@@ -46,7 +64,7 @@
 	    		<col width="150">
 	    		<col width="250">
 				<% if user_signed_in? && current_user.user_type == "Super_admin" %>
-	    		<col width="150">
+	    			<col width="150">
 	    		<% end %>
 				<thead>
 					<tr>
@@ -75,8 +93,8 @@
 						<td><%= member.phone_number %></td>
 						<td><%= simple_format(member.address) %></td>
 						<% if user_signed_in? && current_user.user_type == "Super_admin" %>
-							<td><%= link_to "edit", edit_mahatvachevyakti_path(member) , class: "btn btn-warning btn-xs btn-responsive" %>
-							<%= link_to "delete ", mahatvachevyakti_path(member),method: :delete,data: {confirm: "confirm-delete?"} , class: "btn btn-danger btn-xs btn-responsive"%>
+							<td><%= link_to "Edit", edit_mahatvachevyakti_path(member) , class: "btn btn-primary btn-sm btn-responsive" %>
+							<%= link_to "Delete ", mahatvachevyakti_path(member),method: :delete,data: {confirm: "confirm-delete?"} , class: "btn btn-danger btn-sm btn-responsive"%>
 							</td>
 						<% end %>
 					</tr>
@@ -85,8 +103,12 @@
 			</table>
 			</div>
 		<% else %>
-			<h3 align="center">समाजातील महत्‍वाच्‍या व्‍यक्‍ती डेटाबेसमध्ये आढळला नाही, त्यांना जोडण्यासाठी प्रशासनाशी संपर्क साधा.</h3>
+			<h3>समाजातील महत्‍वाच्‍या व्‍यक्‍ती डेटाबेसमध्ये आढळला नाही, त्यांना जोडण्यासाठी प्रशासनाशी संपर्क साधा.</h3>
 		<% end %>
 		<%= will_paginate @importantpeople, :renderer =>  BootstrapPagination::Rails, :page_links => false, previous_label: "<< नवीन", next_label: "जुने >>" %>
+
+		</div>
 	</div>
-</div>
+	
+	
+		

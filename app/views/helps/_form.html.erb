@@ -1,9 +1,17 @@
-<%= simple_form_for @help do |f| %>
-	<%= f.input :helpie_name, label: "नाव"  %>
-	<%= f.input :helpie_address, label: "पत्ता" %>
-	<%= f.input :helpie_phone, label: "मोबाइल नंबर" %>
-	<%= f.input :help_title, label: "समस्या" %>
-	<%= f.input :help_description,label: "समस्या बाबत सविस्तर माहिती" %>
-	<%= f.input :help_expecation, label: "अपेक्षा" %>
+<%= tinymce %>
+<%= form_for @help do |f| %>
+
+	<h4>नाव</h4>
+	<%= f.text_field :helpie_name, label: "नाव"%>
+	<h4>पत्ता</h4>
+	<%= f.text_area :helpie_address, label: "पत्ता" , class: 'tinymce' %>
+	<h4>मोबाइल नंबर</h4>
+	<%= f.text_field :helpie_phone, label: "मोबाइल नंबर"%>
+	<h4>समस्या</h4>
+	<%= f.text_area :help_title, label: "समस्या" , class: 'tinymce' %>
+	<h4>समस्या बाबत सविस्तर माहिती</h4>
+	<%= f.text_area :help_description,label: "समस्या बाबत सविस्तर माहिती" , class: 'tinymce' %>
+	<h4>अपेक्षा</h4>
+	<%= f.text_area :help_expecation, label: "अपेक्षा" , class: 'tinymce' %>
 	<%= f.submit "सबमिट करा" %>
 <% end %>

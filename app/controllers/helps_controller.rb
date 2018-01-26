@@ -1,6 +1,6 @@
 class HelpsController < ApplicationController
 
-
+require 'will_paginate/array'
 	def index
 		@summary =  Summary.new
 		@summary_exists = Summary.all
@@ -12,7 +12,7 @@ class HelpsController < ApplicationController
 		end
 
 		
-		@helpies = Array.new
+		@helpies_s = Array.new
 		@helpers = Array.new
 		count = 0
 		count_h = 0
@@ -20,7 +20,7 @@ class HelpsController < ApplicationController
 		if @helps != nil && @helps.size > 0
 			for help in @helps
 				if help.helpie_name != nil
-					@helpies.insert(count,help)
+					@helpies_s.insert(count,help)
 					count = count + 1
 				elsif help.helper_name != nil
 					@helpers.insert(count_h,help)
@@ -28,6 +28,7 @@ class HelpsController < ApplicationController
 				end
 			end
 		end
+		@helpies = @helpies_s.paginate(:page => params[:page], :per_page => 6)
 	end
 
 	def show
@@ -61,6 +62,9 @@ class HelpsController < ApplicationController
 		@help = Help.new(help_params)
 		@help.user_id = current_user.id
 		if @help.save
+			if @help.helpie_name != nil
+				AllMailer.help_new(@help).deliver_now
+			end
 			redirect_to helps_path
 		end
 	end

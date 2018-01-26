@@ -1,6 +1,18 @@
-			<%= simple_form_for @recruitment do |f| %>
-			<%= f.input :title %>
-			<%= f.input :description %>
-			<%= f.file_field :attachment%>
-			<%= f.submit "जतन करा" %>
-			<% end %>
+<%= simple_form_for @recruitment do |f| %>
+	<p>फोटो</p>
+	<%= f.file_field :r_photo %>
+	<br>
+	<%= f.input :r_name,label: "नाव" %>
+	<%= f.input :education ,label: "शिक्षण" %>
+	<%= f.input :technical_education ,label: "तांत्रिक शिक्षण" %>
+	<%= f.input :phone_no ,label: "फोन नंबर " %>
+	<%= f.input :experience_post ,label: "अनुभव/पदनाम " %>
+	<%= f.input :org_name ,label: "संस्थेचे नाव" %>
+	<%= f.input :from ,label: "केव्हापासून " %>
+	<%= f.input :till ,label: "केव्हापर्यंत " %>
+	<%= f.input :r_email ,label: "ई-मेल " %>
+	<%= f.input :address ,label: "पत्ता" %>
+	<p>Resume</p>
+	<%= f.file_field :attachment%>
+	<%= f.submit "जतन करा" %>
+<% end %>

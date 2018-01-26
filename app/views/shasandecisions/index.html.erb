@@ -1,32 +1,29 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
-<h2 align="center"><strong>शासन निर्णय</strong></h2>
+<%= tinymce %>
+	<h2 align="center"><strong>शासन निर्णय</strong></h2>
 	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :shasannirnay_summary, label: "शासन निर्णय सारांश" %>
-		<%= f.submit "Update" %>
-	<% end %>
-<% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :shasannirnay_summary, label: "शासन निर्णय सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :shasannirnay_summary, label: "शासन निर्णय सारांश",class: "tinymce" %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :shasannirnay_summary, label: "शासन निर्णय सारांश",class: "tinymce" %>
 			<%= f.submit "Save" %>
-	<% end %>
-<% end %>
-	</div>
+			<% end %>
+		<% end %>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 align="center" class="margin-bottom2">(<%= simple_format(@summary_exist.shasannirnay_summary) %>)</h4>
+		<% if @summary_exist != nil %>
+			<h4 class="margin-bottom2"><%= @summary_exist.shasannirnay_summary.html_safe %></h4>
+		<% end %>
 	<% end %>
-	<% end %>
+	
 	<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-		<%= link_to "नवीन शासन निर्णय ",new_shasandecision_path, class: "btn btn-info btn-sm" %>
+		<%= link_to "नवीन शासन निर्णय ",new_shasandecision_path, class: "btn btn-primary btn-sm btn-responsive" %>
 	<% end %>
 	<hr>
-		<div class="row">
+
+	<div class="row">
 		<div class="col-xs-8">
 			<% if @shasandecisions != nil && @shasandecisions.size > 0 %>
 				<div class="table-responsive">
@@ -43,18 +40,21 @@
 					<% for shasandecision in @shasandecisions %>
 					<tbody>
 						<tr>
-							<td align="center"><%= count %></td>
+							<td align="center"><strong><%= count %></strong></td>
 							<td>
-								<p align="left" class="margin-left"><b><%= shasandecision.title %></b></p>
-								<p align="left" class="margin-left"><%= simple_format(shasandecision.description) %></p>
-								<p align="left" class="margin-left"><% if shasandecision.attachment? %>
+								<p><b><%= shasandecision.title.html_safe %></b></p>
+								<hr>
+								<p><%= shasandecision.description.html_safe %></p>
+								<hr>
+								<p><% if shasandecision.attachment? %>
 										<%= link_to "#{truncate(File.basename(shasandecision.attachment.path),length: 25)}", :action => 'download_file_shasandecision', :controller=>"shasandecisions", :id => shasandecision.id,:target => "_blank" %>
+										<hr>
 									<% end %>
 								</p>
-								<p align="left" class="margin-left">
+								<p>
 								<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-									<%= link_to "Edit ",edit_shasandecision_path(shasandecision), class: "btn btn-warning btn-sm " %>
-									<%= link_to "Delete",shasandecision_path(shasandecision),method: :delete, class: "btn btn-danger btn-sm " %>
+									<%= link_to "Edit ",edit_shasandecision_path(shasandecision), class: "btn btn-primary btn-sm btn-responsive" %>
+									<%= link_to "Delete",shasandecision_path(shasandecision),method: :delete, class: "btn btn-danger btn-sm btn-responsive" %>
 								<% end %>
 								</p>
 							</td>		
@@ -74,13 +74,10 @@
 					<h3>जाहिरात</h3>
 				</div>
 					<div class="panel-body scrollable">
-				 <div class="advertisement-box">
-				  
-</div>
 			<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">
-						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<p class="underline-text"><strong><%= ad.title %></strong></p>
 						<% if ad.photo? %>
 							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
 						<% end %>
@@ -92,5 +89,3 @@
 			</div>	
 		</div>
 		</div>
-	</div>
-</div>

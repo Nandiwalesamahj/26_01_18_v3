@@ -1,32 +1,28 @@
-<div class="row">
-<%= render 'home/sidebar' %>
-
-	<div class="col-xs-10">
+<%= tinymce %>
 <h2 align="center"><strong>सामाजिक संस्‍था</strong></h2>
 	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
-	<div class="row">
 		<% if @summary_exist != nil %>
-	<%= simple_form_for @summary_exist do |f| %>
-		<%= f.input :samajiksanstha_summary, label: "सामाजिक संस्‍था सारांश" %>
-		<%= f.submit "Update" %>
-	<% end %>
-<% else %>
-	<%= simple_form_for @summary do |f| %>
-			<%= f.input :samajiksanstha_summary, label: "सामाजिक संस्‍था सारांश" %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :samajiksanstha_summary, label: "सामाजिक संस्‍था सारांश" , class: 'tinymce' %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :samajiksanstha_summary, label: "सामाजिक संस्‍था सारांश" , class: 'tinymce' %>
 			<%= f.submit "Save" %>
-	<% end %>
-<% end %>
-	</div>
+			<% end %>
+		<% end %>
 	<% else %>
-	<% if @summary_exist != nil %>
-	<h4 class="margin-bottom2">(<%= simple_format(summary_exist.samajiksanstha_summary) %>)</h4>
-	<% end %>
+		<% if @summary_exist != nil %>
+			<h4 class="margin-bottom2"><%= summary_exist.samajiksanstha_summary.html_safe %></h4>
+		<% end %>
 	<% end %>
 	<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-		<%= link_to "समाजिक संस्था जोडा",new_samajiksanstha_path, class: "btn btn-info btn-sm" %>
+		<%= link_to "समाजिक संस्था जोडा",new_samajiksanstha_path, class: "btn btn-primary btn-sm btn-responsive" %>
 	<% end %>
 	<hr>
-		<div class="row">
+		
+	<div class="row">
 			<div class="col-xs-8">
 				<% if @samajiksansthas != nil && @samajiksansthas.size > 0 %>
 				<div class="table-responsive">
@@ -44,20 +40,26 @@
 						<tbody>
 						<tr>
 							<% if samajiksanstha != nil %>
-							<td align="center"><%= count %></td>
+							<td align="center"> <strong><%= count %></strong></td>
 							
 							<td>
-								<p align="left" class="margin-left"><% if samajiksanstha.title %><b> <%= samajiksanstha.title %></b><% end %>
-								<% if samajiksanstha.description %><%= simple_format(samajiksanstha.description) %><% end %> </p>
-								<p align="left" class="margin-left">
+								<p><% if samajiksanstha.title %><b> <%= samajiksanstha.title.html_safe %></b><% end %>
+								</p>
+								<hr>
+								<p><% if samajiksanstha.description %><%= samajiksanstha.description.html_safe %>
+									<% end %>
+								</p>
+								<hr>
+								<p>
 									<% if samajiksanstha.attachment? %>
 										<%= link_to "#{truncate(File.basename(samajiksanstha.attachment.path),length: 25)}", :action => 'download_file_samajiksanstha', :controller=>"samajiksansthas", :id => samajiksanstha.id %>
 									<% end %>
+									<hr>
 								</p>
-								<p align="left" class="margin-left">
+								<p>
 									<% if user_signed_in? && (current_user.user_type == "Super_admin") %>
-									<%= link_to "Edit",edit_samajiksanstha_path(samajiksanstha), class: "btn btn-warning btn-xs btn-responsive" %>
-									<%= link_to "Delete",samajiksanstha_path(samajiksanstha),method: :delete, class: "btn btn-danger btn-xs btn-responsive" %>
+									<%= link_to "Edit",edit_samajiksanstha_path(samajiksanstha), class: "btn btn-primary btn-sm btn-responsive" %>
+									<%= link_to "Delete",samajiksanstha_path(samajiksanstha),method: :delete, class: "btn btn-danger btn-sm btn-responsive" %>
 									<% end %>
 								</p>
 							</td>
@@ -84,7 +86,7 @@
 			<% if @ads.size > 0 %>
 				<% for ad in @ads %>
 					<div class="advertisement-box">
-						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<p class="underline-text"><strong><%= ad.title %></strong></p>
 						<% if ad.photo? %>
 							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
 						<% end %>
@@ -96,5 +98,3 @@
 			</div>	
 		</div>
 		</div>
-	</div>
-</div>

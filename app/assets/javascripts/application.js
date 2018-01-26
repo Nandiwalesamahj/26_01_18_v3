@@ -13,6 +13,14 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-fileupload/basic
 //= require turbolinks
 //= require chosen-jquery
+//= require galleries
 //= require home
+//= require tinymce-jquery
+//= require rails_emoji_picker
+//= require charts-custom
+//= require charts-home
+//= require front
+$('[id^=tinyelement_toolbar]').css('display','inline-table')

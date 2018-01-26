@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	#before_action :authenticate_user!
 
 	def edit
-		unless current_user.user_type = "Super_admin"
+		unless current_user.user_type == "Super_admin"
 			@user = current_user
 		else
 			@user = User.find(params[:id])
