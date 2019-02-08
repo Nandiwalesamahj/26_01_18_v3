@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'tzinfo-data'
 # Use Capistrano for deployment
-#gem 'sqlite3'
+gem 'sqlite3'
 # gem 'capistrano-rails', group: :development
 gem 'devise', '~> 4.3'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
@@ -64,5 +64,6 @@ gem 'web-console', '>= 3.3.0'
 gem 'capistrano', '~> 3.9'
 gem 'capistrano-rails', '~> 1.3'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.1'
-gem 'capistrano-passenger'
+gem 'capistrano-bundler', require: false
+gem 'capistrano3-puma',   require: false
 end
