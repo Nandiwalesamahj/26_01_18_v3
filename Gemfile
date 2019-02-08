@@ -8,7 +8,7 @@ end
 gem 'rails', '~> 5.0.4'
 gem 'progress_bar'
 # Use sqlite3 as the database for Active Record
-#gem 'pg'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'tzinfo-data'
 # Use Capistrano for deployment
-gem 'sqlite3'
+#gem 'sqlite3'
 # gem 'capistrano-rails', group: :development
 gem 'devise', '~> 4.3'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
